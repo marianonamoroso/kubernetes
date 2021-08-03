@@ -1,6 +1,6 @@
 <h1>AR - Kubernetes</h1><br>
-# TOOL: kube-response.sh<br>
-# NEEDED BINS: kubectl & aws-sso-magic<br>
-# AUTHOR: Mariano Amoroso<br>
+<b>TOOL: kube-response.sh</b><br>
+<b>NEEDED BINS: kubectl & aws-sso-magic</b><br>
+<b>AUTHOR: Mariano Amoroso</b><br>
 
 
