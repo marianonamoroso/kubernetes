@@ -1,5 +1,5 @@
 #!/bin/bash
-# POD ERRORS LOGGING
+# POD LOGGING
 # AUTHOR: MARIANO AMOROSO
 # BIN: kubectl
 # NAMESPACE: emed
