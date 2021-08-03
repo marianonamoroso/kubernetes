@@ -1,3 +1,5 @@
 # Kubernetes
-<h3>LOGGING POD ERRORS</h3> <br>
+<h3>LOGGING PODS</h3><br>
+Bash: pod-logging
+Author: Mariano Amoroso
 
