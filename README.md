@@ -1,5 +1,6 @@
-# Kubernetes
-<h3>LOGGING PODS</h3><br>
-Bash: pod-logging <br>
-Author: Mariano Amoroso
+<h1>AR - Kubernetes</h1><br>
+# TOOL: kube-response.sh<br>
+# NEEDED BINS: kubectl & aws-sso-magic<br>
+# AUTHOR: Mariano Amoroso<br>
+
 
