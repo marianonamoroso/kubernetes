@@ -21,7 +21,7 @@ while [ $exit == 0 ]; do
     echo "[4 - Deployments load]"
     echo "[5 - Logging running pods]"
     echo ""
-    read -p "Please, select your the number: " option
+    read -p "Please, select the number: " option
 
     case $option in
             0) # Exit
