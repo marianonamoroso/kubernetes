@@ -4,7 +4,7 @@ AUTHOR: <b>Mariano Amoroso</b><br>
 NEEDED BINS: <b>kubectl & aws-sso-magic</b><br>
 REPO: aws-sso-magic https://github.com/javiortizmol/aws-sso-magic
 <br>
-<h3Features<h3>
+<h3Features</h3>
 [1 - EKS conn] <br>
 [2 - Pods load] <br>
 [3 - Nodes load] <br>
