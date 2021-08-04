@@ -11,7 +11,6 @@ REPO: aws-sso-magic https://github.com/javiortizmol/aws-sso-magic
 [4 - Deployments load] <br>
 [5 - Logging running pods]<br>
 <br>
-![image](https://user-images.githubusercontent.com/8485060/128103265-3c54bec6-359e-4dfd-a365-162cf3a54ba7.png)
 
 
 
