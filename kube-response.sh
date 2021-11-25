@@ -1,7 +1,7 @@
 #!/bin/bash
 # TOOL: kube-response.sh
 # NEEDED BINS: kubectl & aws-sso-magic
-# NAMESPACE: emed
+# NAMESPACE: ns
 # AUTHOR: MA
 
 #VARIABLES
@@ -34,8 +34,8 @@ while [ $exit == 0 ]; do
             1) # [1 - EKS CONNECTION]
                 aws-sso-magic login --profile production-admin
                 wait; tput setaf 2 ;echo "Login completed: aws-sso-magic login --profile production-admin";tput sgr0; echo ""
-                aws-sso-magic login --eks --cluster emed-prod
-                wait; tput setaf 2 ;echo "Cluster emed-prod configured:aws-sso-magic login --eks --cluster emed-prod";tput sgr0; echo ""
+                aws-sso-magic login --eks --cluster ns-prod
+                wait; tput setaf 2 ;echo "Cluster ns-prod configured:aws-sso-magic login --eks --cluster ns-prod";tput sgr0; echo ""
                 export AWS_PROFILE=production-admin
                 wait; tput setaf 2 ;echo "AWS_PROFILE configured:export AWS_PROFILE=production-admin";tput sgr0; echo ""
                 ;;
@@ -44,26 +44,26 @@ while [ $exit == 0 ]; do
             2) # [2 - PODS LOAD]
                 echo ""
                 tput setaf 2; echo "[Pods]";tput sgr0;
-                kubectl top pods -n emed
+                kubectl top pods -n ns
                 echo ""
                 tput setaf 2; echo "[Pods & Nodes]";tput sgr0;
-                kubectl get pods -o wide -n emed
+                kubectl get pods -o wide -n ns
                 ;;
             
             3) # [3 - NODES LOAD]
                 echo ""
                 tput setaf 2; echo "[Nodes]";tput sgr0;
-                kubectl top nodes -n emed
+                kubectl top nodes -n ns
                 echo ""
                 ;;
             
             4) # [4 - DEPLOYMENTS]
                 echo ""
                 tput setaf 2; echo "[Deployments]";tput sgr0;
-                kubectl get deployments -n emed
+                kubectl get deployments -n ns
                 echo ""
                 tput setaf 2; echo "[Horizontal Pod Autoscaling]";tput sgr0;
-                kubectl get hpa -n emed
+                kubectl get hpa -n ns
 
                 ;;
             
@@ -71,7 +71,7 @@ while [ $exit == 0 ]; do
                 echo ""
                 tput setaf 2; echo "[Logging running pods]";tput sgr0;
                 echo ""
-                for pod in $(kubectl get pods -n emed --no-headers=true | awk '{print $1}')
+                for pod in $(kubectl get pods -n ns --no-headers=true | awk '{print $1}')
                 do
                     tput sgr0 ; echo "Extracting logs of: $pod" 
                     echo "################################################">>$pod.logs
@@ -79,7 +79,7 @@ while [ $exit == 0 ]; do
                     echo "################################################">>$pod.logs
                     date >$pod.logs
                     echo "" >>$pod.logs
-                    kubectl logs $pod -n emed >>$pod.logs
+                    kubectl logs $pod -n ns >>$pod.logs
                     tput setaf 2 ;echo "A log file was created: $pod.logs"
                     tput sgr0;echo ""
                 done
