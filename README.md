@@ -1,4 +1,5 @@
 <h1>AR - Kubernetes</h1><br>
+DESC: <b>kube-reponse gives you shortcuts for listing and exporting information of your nodes, pods and deployments via cli without memorizing some options with kubectl</b><br>
 TOOL: <b>kube-response.sh</b><br>
 AUTHOR: <b>Mariano Amoroso</b><br>
 NEEDED BINS: <b>kubectl & aws-sso-magic</b><br>
