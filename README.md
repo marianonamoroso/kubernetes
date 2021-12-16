@@ -173,10 +173,10 @@ Alias: k=kubectl
       <details><summary>Show</summary>
 
       ```
-      k taint node worker1 sray=mortein:NoSchedule
+      k taint node worker1 spray=mortein:NoSchedule
       k run pod-taint --image=nginx --namespace=pyf
       k get pods -o wide -n pyf
-      k taint node worker1 sray- #untainted
+      k taint node worker1 spray- #untainted
       ```
       </details>        
       
