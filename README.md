@@ -15,8 +15,8 @@ We'll use the following alias: k=kubectl
       <details><summary>Show</summary>
 
       ```
-      k run nginx-1 --image=nginx --namespace=pyf --labels=application=backend
-      k run nginx-2 --image=nginx --namespace=pyf --labels=application=backend
+      k run nginx1 --image=nginx --namespace=pyf --labels=application=backend
+      k run nginx2 --image=nginx --namespace=pyf --labels=application=backend
       k get pod -n pyf
       ```
       </details>
