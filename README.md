@@ -20,7 +20,14 @@ We'll use the following alias: k=kubectl
       k get pod -n pyf
       ```
       </details>
-3. 
+3. <b>Change pod nginx2 label to application=frontend.</b>
+      <details><summary>Show</summary>
+
+      ```
+      k label pod nginx2 application=frontend --overwrite -n pyf
+      k describe pod -n pyf nginx2 | grep -i label
+      ```
+      </details>
 
 
 
