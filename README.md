@@ -135,4 +135,13 @@ Alias: k=kubectl
       k describe pod -n pyf <pod_name> #Error: ErrImagePull
       ```
       </details>          
-      
+16. <b>Return the deployment to working state and verify the image is nginx:1.19.</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k rollout undo deployment hr-app -n pyf 
+      k rollout status deployment hr-app -n pyf
+      k get pod -n pyf
+      k describe pod -n pyf | grep -i image:
+      ```
+      </details>              
