@@ -59,7 +59,22 @@ This repository contains helpful general use commands when working with Kubernet
       k describe svc messaging-service -n pyf #ClusterIP
       ```
       </details>      
-      
+8. Create a busybox-echo pod that echoes 'hello world' and exits. After that check the logs. 
+      <details><summary>Show</summary>
+
+      ```
+      k run busybox-echo --image=busybox --namespace=pyf -- echo "hello world"
+      k logs busybox-echo -n pyf
+      ```
+      </details>       
+9. Create an nginx-test pod and set an env value as var1=val1. Check the env value existence within the pod. 
+      <details><summary>Show</summary>
+
+      ```
+      k run nginx-text --image=nginx --namespace=pyf --env=var1=val1
+      k describe pod/nginx-text -n pyf | grep -i env -A1
+      ```
+      </details>     
 
 
 
