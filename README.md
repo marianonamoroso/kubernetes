@@ -144,4 +144,28 @@ Alias: k=kubectl
       k get pod -n pyf
       k describe pod -n pyf | grep -i image:
       ```
-      </details>              
+      </details>
+<h2>Scheduling</h2>
+      
+17. <b>Shedule a nginx pod on specific node using NodeName.</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k run nginx-worker1 --image=nginx --namespace=pyf --dry-run=client -o yaml > nginx-nodename.yml
+      vi nginx-nodename.yml # nodeName: worker1
+      k apply -f nginx-nodename.yml 
+      k get pods -n pyf -o wide |grep -i nginx-worker1
+      ```
+      </details>      
+18. <b>Schedule a nginx pod based on node label using nodeSelector.</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k label node worker1 nodeselector=pyf
+      k get nodes --show-labels
+      k run nginx-nodeselector --image=nginx --namespace=pyf --dry-run=client -o yaml > nginx-nodeselector.yml
+      vi nginx-nodeselector.yml # nodeSelector: nodeselector: pyf
+      k apply -f nginx-nodeselector.yml
+      k get pod -n pyf -o wide
+      ```
+      </details>  
