@@ -110,6 +110,29 @@ Alias: k=kubectl
       ```
       k set image deployments/hr-app -n pyf nginx=nginx:1.19
       k describe deployments/hr-app -n pyf | grep -i image
+      k get deployment hr-app -n pyf
+      k get pod -n pyf
       ```
       </details>       
+14. <b>Undo the latest rollout and verify that new pods have the old image (nginx:1.18)</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k rollout undo deployment hr-app -n pyf
+      k rollout status deployment hr-app -n pyf
+      k describe deployment -n pyf hr-app | grep -i image
+      k get deployment -n pyf
+      k get pod -n pyf
+      ```
+      </details>     
+15. <b>Do an update of the deployment with a wrong image nginx:1.91 and check the status.</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k set image deployment hr-app -n pyf nginx=nginx:1.91
+      k rollout status -n pyf deployment hr=app
+      k get pod -n pyf
+      k describe pod -n pyf <pod_name> #Error: ErrImagePull
+      ```
+      </details>          
       
