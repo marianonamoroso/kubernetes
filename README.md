@@ -1,7 +1,8 @@
 <img src="https://user-images.githubusercontent.com/8485060/146396141-6682bb2b-8712-465e-a0a1-241c99d88486.png" width=80 height="80"/>
 <h1>Kubernetes</h1>
-This repository contains helpful general use commands when working with Kubernetes (reference: https://github.com/StenlyTU/K8s-training-official). <br>Also, you have kube-response tool giving you shortcuts for listing and exporting information of your nodes, pods and deployments via cli without memorizing some options with kubectl<br><br>
-<i>FYI: We'll use the following alias: k=kubectl</i>
+This repository contains helpful use commands. Also, I created the kube-response tool giving you shortcuts for listing and exporting information of your nodes, pods and deployments via cli without memorizing some options with kubectl<br><br>
+Exercises: https://github.com/StenlyTU/K8s-training-official<br>
+Alias: k=kubectl
 <h2>Core Concepts </h2>
 
 1. <b>Create namespace called pyf</b>.
