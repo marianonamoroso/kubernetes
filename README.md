@@ -47,16 +47,16 @@ This repository contains helpful general use commands when working with Kubernet
       <details><summary>Show</summary>
 
       ```
-      k run messaging --image=redis:alpine --labels=tier=msg
-      k get pod -n default --show-labels
+      k run messaging --image=redis:alpine --labels=tier=msg --namespace=pyf
+      k get pod -n default --show-labels -n pyf
       ```
       </details>  
 7. <b>Create a service called messaging-service to expose the messaging application within the cluster on port 6379 and describe it.</b>
       <details><summary>Show</summary>
 
       ```
-      k expose --name=messaging-service pod messaging --port=6379
-      k describe svc messaging-service #ClusterIP
+      k expose --name=messaging-service pod messaging --port=6379 --namespace=pyf
+      k describe svc messaging-service -n pyf #ClusterIP
       ```
       </details>      
       
