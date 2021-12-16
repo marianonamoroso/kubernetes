@@ -169,3 +169,15 @@ Alias: k=kubectl
       k get pod -n pyf -o wide
       ```
       </details>  
+19. <b>Taint a node with key=spray, value=mortein and effect=NoSchedule. Check that new pods are not scheduled on it.</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k taint node worker1 sray=mortein:NoSchedule
+      k run pod-taint --image=nginx --namespace=pyf
+      k get pods -o wide -n pyf
+      k taint node worker1 sray- #untainted
+      ```
+      </details>        
+      
+      
