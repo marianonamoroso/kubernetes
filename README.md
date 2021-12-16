@@ -59,7 +59,7 @@ This repository contains helpful general use commands when working with Kubernet
       k describe svc messaging-service -n pyf #ClusterIP
       ```
       </details>      
-8. Create a busybox-echo pod that echoes 'hello world' and exits. After that check the logs. 
+8. <b>Create a busybox-echo pod that echoes 'hello world' and exits. After that check the logs.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -67,7 +67,7 @@ This repository contains helpful general use commands when working with Kubernet
       k logs busybox-echo -n pyf
       ```
       </details>       
-9. Create an nginx-test pod and set an env value as var1=val1. Check the env value existence within the pod. 
+9. <b>Create an nginx-test pod and set an env value as var1=val1. Check the env value existence within the pod.</b> 
       <details><summary>Show</summary>
 
       ```
