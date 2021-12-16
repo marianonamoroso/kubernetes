@@ -1,6 +1,6 @@
 <img src="https://user-images.githubusercontent.com/8485060/146396141-6682bb2b-8712-465e-a0a1-241c99d88486.png" width=80 height="80"/>
 <h1>Kubernetes</h1>
-This repository contains helpful general use commands when working with Kubernetes (reference: https://github.com/StenlyTU/K8s-training-official). Also, you have kube-response tool giving you shortcuts for listing and exporting information of your nodes, pods and deployments via cli without memorizing some options with kubectl<br><br>
+This repository contains helpful general use commands when working with Kubernetes (reference: https://github.com/StenlyTU/K8s-training-official). <br>Also, you have kube-response tool giving you shortcuts for listing and exporting information of your nodes, pods and deployments via cli without memorizing some options with kubectl<br><br>
 <i>FYI: We'll use the following alias: k=kubectl</i>
 <h2>Core Concepts </h2>
 
@@ -43,7 +43,7 @@ This repository contains helpful general use commands when working with Kubernet
       k delete pod -n pyf nginx{1,2}
       ```
       </details>  
-6. <b>Remove all pods to clean your namespace.</b>
+6. <b>Create a messaging pod using redis:alpine image with label set to tier=msg.</b>
       <details><summary>Show</summary>
 
       ```
@@ -51,7 +51,14 @@ This repository contains helpful general use commands when working with Kubernet
       k get pod -n default --show-labels
       ```
       </details>  
-      
+7. <b>Create a service called messaging-service to expose the messaging application within the cluster on port 6379 and describe it.</b>
+      <details><summary>Show</summary>
+
+      ```
+      k expose --name=messaging-service pod messaging --port=6379
+      k describe svc messaging-service #ClusterIP
+      ```
+      </details>      
       
 
 
