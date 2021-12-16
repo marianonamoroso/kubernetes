@@ -71,8 +71,9 @@ This repository contains helpful general use commands when working with Kubernet
       <details><summary>Show</summary>
 
       ```
-      k run nginx-text --image=nginx --namespace=pyf --env=var1=val1
-      k describe pod/nginx-text -n pyf | grep -i env -A1
+      k run nginx-test --image=nginx --namespace=pyf --env=var1=val1
+      k describe pod/nginx-test -n pyf | grep -i env -A1
+      k exec -it nginx-test -n pyf -- env
       ```
       </details>     
 
