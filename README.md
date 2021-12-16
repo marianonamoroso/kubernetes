@@ -3,7 +3,7 @@
 This repository contains helpful use commands. Also, I created the kube-response tool giving you shortcuts for listing and exporting information of your nodes, pods and deployments via cli without memorizing some options with kubectl<br><br>
 Exercises: https://github.com/StenlyTU/K8s-training-official<br>
 Alias: k=kubectl
-<h2>Core Concepts </h2>
+<h2>Core Concepts</h2>
 
 1. <b>Create namespace called pyf</b>.
       <details><summary>Show</summary>
@@ -78,6 +78,38 @@ Alias: k=kubectl
       ```
       </details>     
 
+<h2>Deployments</h2>
 
+10. <b>Create a deployment named hr-app using the image nginx:1.18 with 2 replicas.</b> 
+      <details><summary>Show</summary>
 
+      ```
+      k create deployment hr-app --image=nginx:1.18 --replicas=2 --namespace=pyf
+      k get -n pyf deployment.apps/hr-app
+      ```
+      </details> 
+11. <b>Scale hr-app deployment to 3 replicas.</b> 
+      <details><summary>Show</summary>
 
+      ```
+      k scale deployment hr-app -n pyf --replicas=3
+      k get -n pyf deployment.apps/hr-app
+      ```
+      </details>
+12. <b>Update the hr-app image to nginx:1.19.</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k set image deployments/hr-app -n pyf nginx=nginx:1.19
+      k describe deployments/hr-app -n pyf | grep -i image
+      ```
+      </details>      
+13. <b>Check the rollout history of hr-app and confirm that the replicas are OK.</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k set image deployments/hr-app -n pyf nginx=nginx:1.19
+      k describe deployments/hr-app -n pyf | grep -i image
+      ```
+      </details>       
+      
