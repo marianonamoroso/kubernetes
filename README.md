@@ -235,4 +235,50 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       ```
       </details>        
       
-      
+22. <b>Add label color=blue to one node and create nginx deployment called blue with 5 replicas and node Affinity rule to place the pods onto the labeled node. 
+</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k label node worker1 color=blue      
+      k create deployment blue --image=nginx --namespace=pyf --replicas=5 --dry-run=client -o yaml > 22-deployment.yml      
+      ```
+      ```
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: blue
+        name: blue
+        namespace: pyf
+      spec:
+        replicas: 5
+        selector:
+          matchLabels:
+            app: blue
+        strategy: {}
+        template:
+          metadata:
+            creationTimestamp: null
+            labels:
+              app: blue
+          spec:
+            affinity:
+              nodeAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution: # pod will get scheduled only on a node that has a color=blue label
+                  nodeSelectorTerms:
+                  - matchExpressions:
+                    - key: color
+                      operator: In
+                      values:
+                      - blue   
+            containers:
+            - image: nginx
+              name: nginx
+              resources: {}      
+      ```      
+      ```
+      k apply -f 22-deployment.yml
+      k get pods -n pyf -o wide
+      ```       
