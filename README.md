@@ -2,7 +2,7 @@
 <h1>Kubernetes</h1>
 This repository contains helpful use commands. Also, I created the kube-response tool giving you shortcuts for listing and exporting information of your nodes, pods and deployments via cli without memorizing some options with kubectl<br>
 
-<p float="right"><b>Exercises:</b> <img src="https://user-images.githubusercontent.com/8485060/146467091-9a839f96-34a6-4246-b7bd-ea0cefa61244.png" width="20" height="20" onclick="javascript:window.location='https://github.com/StenlyTU/K8s-training-official';" /></p>
+<b>Exercises:</b> https://github.com/StenlyTU/K8s-training-official
 
 <h2>Variables</h2>
 
@@ -10,7 +10,6 @@ This repository contains helpful use commands. Also, I created the kube-response
 alias k='kubectl'
 export do='—dry-run=client -o yaml' 
 ```
-
 <h2>Core Concepts</h2>
 
 1. <b>Create namespace called pyf</b>.
