@@ -4,11 +4,12 @@ This repository contains helpful use commands. Also, I created the kube-response
 
 <b>Exercises:</b> https://github.com/StenlyTU/K8s-training-official
 
-<h2>Variables</h2>
+<h2>Variables & Useful Stuff</h2>
 
 ```
 alias k='kubectl'
-export do='—dry-run=client -o yaml' 
+export do='—dry-run=client -o yaml'
+kubectl config set-context <your_context> --namespace=pyf # avoiding type the namespace on each commands
 ```
 <h2>Core Concepts</h2>
 
