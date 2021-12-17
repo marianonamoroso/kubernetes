@@ -237,7 +237,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       
 22. <b>Add label color=blue to one node and create nginx deployment called blue with 5 replicas and node Affinity rule to place the pods onto the labeled node.</b> 
       <details><summary>Show</summary>
-
+      
       ```
       k label node worker1 color=blue      
       k create deployment blue --image=nginx --namespace=pyf --replicas=5 --dry-run=client -o yaml > 22-deployment.yml      
@@ -281,4 +281,15 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k apply -f 22-deployment.yml
        k get pods -n pyf -o wide
        ```
-       </details>      
+       </details>
+      
+<h2>Configurations</h2>
+      
+23. <b>Create a configmap named my-config with values key1=val1 and key2=val2. Check it's values.</b> 
+       <details><summary>Show</summary>
+       
+       ```      
+       k create configmap my-config --from-literal=key1=val1 --from-literal=key2=val2 --namespace pyf
+       k describe configmap/my-config -n pyf
+       ```
+       </details>  
