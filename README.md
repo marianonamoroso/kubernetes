@@ -180,45 +180,59 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 19. <b>Taint a node with key=spray, value=mortein and effect=NoSchedule. Check that new pods are not scheduled on it.</b> 
       <details><summary>Show</summary>
 
-      - [x] taint
       ```      
       k taint node worker1 spray=mortein:NoSchedule
-      ``` 
-      - [x] pod creation
-      ```       
       k run pod-taint --image=nginx --namespace=pyf
-      ``` 
-      - [x] checking pod
-      ```      
       k get pods -o wide -n pyf
       ```
       </details>   
 20. <b>Create another pod called nginx-toleration with nginx image, which tolerates the above taint.</b> 
       <details><summary>Show</summary>
-
-      - [x] pod-toleration.yml # podSpec
-      ```      
+      
+      ```
+      # podSpec
       tolerations:
       - key: "spray"
         operator: "Equal"
         value: "mortein"
         effect: "NoSchedule"
-      ```      
-      - [x] applying yml
+      ```
       ```      
       k apply -f pod-toleration.yml
-      ```      
-      - [x] checking pod
-      ```
       k get pod -n pyf -o wide
-           
-      ```
-      - [x] untainted
-      ```
-      k taint node worker1 spray- 
+      k taint node worker1 spray- #untainted
       ```
       </details>         
       
-      
+21. <b>Create a DaemonSet using image fluentd-elasticsearch:1.20.</b> 
+      <details><summary>Show</summary>
+
+      ```
+      apiVersion: apps/v1
+      kind: DaemonSet
+      metadata:
+        labels:
+          app: elastic-search
+        name: elastic-search
+        namespace: pyf
+      spec:
+        selector:
+          matchLabels:
+            app: elastic-search
+        template:
+          metadata:
+            labels:
+              app: elastic-search
+          spec:
+            containers:
+            - image: k8s.gcr.io/fluentd-elasticsearch:1.20
+              name: fluentd-elasticsearch      
+      ```      
+      ```      
+      k apply -f demonset.yml
+      k get ds -n pyf
+      k get pod -n pyf      
+      ```
+      </details>        
       
       
