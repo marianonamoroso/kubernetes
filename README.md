@@ -235,8 +235,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       ```
       </details>        
       
-22. <b>Add label color=blue to one node and create nginx deployment called blue with 5 replicas and node Affinity rule to place the pods onto the labeled node. 
-</b> 
+22. <b>Add label color=blue to one node and create nginx deployment called blue with 5 replicas and node Affinity rule to place the pods onto the labeled node.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -277,8 +276,9 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
             - image: nginx
               name: nginx
               resources: {}      
-      ```      
-      ```
-      k apply -f 22-deployment.yml
-      k get pods -n pyf -o wide
-      ```       
+       ```      
+       ```
+       k apply -f 22-deployment.yml
+       k get pods -n pyf -o wide
+       ```
+       </details>      
