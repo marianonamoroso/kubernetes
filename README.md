@@ -373,4 +373,44 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```      
        k -n pyf exec -it nginx-sec -- env|grep -i var
        ```
+       </details>    
+       
+26. <b>Create a configMap cmvolume with values var8=val8 and var9=val9. Load this as a volume inside an nginx-cm pod on path /etc/spartaa. Create the pod and 'ls' into the /etc/spartaa directory.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k create configmap cmvolume --from-literal=var8=val8 --from-literal=var9=val9 --namespace=pyf  
+       ```
+       ```
+       k run nginx-cm --image=nginx --namespace=pyf --dry-run=client -o yaml > 26-pod.yml
+       vi 26-pod.yml      
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: nginx-cm
+         name: nginx-cm
+         namespace: pyf
+       spec:
+         volumes:
+           - name: config-volume
+             configMap:
+               name: cmvolume
+         containers:
+         - image: nginx
+           name: nginx-cm
+           volumeMounts:
+             - name: config-volume
+               mountPath: /etc/spartaa    
+       ```
+       ``` 
+       k create -f 26-pod.yml     
+       ```       
+       ```      
+       k exec -n pyf nginx-cm -it -- ls /etc/spartaa
+       ```
        </details>       
+             
