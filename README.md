@@ -331,5 +331,46 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k -n pyf exec -it nginx-opt -- env|grep -i OPTIONS
        ```
        </details>       
-      
-      
+ 
+25. <b>Create a configmap anotherone with values var6=val6 and var7=val7. Load this configmap as an env variables into a nginx-sec pod.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k create configmap anotherone --from-literal=var6=val6 --from-literal=var7=val7 --namespace=pyf      
+       ```
+       ```
+       k run nginx-sec --image=nginx --namespace=pyf --dry-run=client -o yaml > 25-pod.yml
+       vi 25-pod.yml      
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: nginx-sec
+         namespace: pyf
+         name: nginx-sec
+       spec:
+         containers:
+         - image: nginx
+           name: nginx-sec
+           env:
+             - name: var6
+               valueFrom:
+                 configMapKeyRef:
+                   name: anotherone
+                   key: var6
+             - name: var7
+               valueFrom:
+                 configMapKeyRef:
+                   name: anotherone
+                   key: var7        
+       ```
+       ``` 
+       k create -f 25-pod.yml     
+       ```       
+       ```      
+       k -n pyf exec -it nginx-sec -- env|grep -i var
+       ```
+       </details>       
