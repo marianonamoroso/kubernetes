@@ -462,3 +462,38 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
              
        ```
        </details>        
+
+29. <b>Create an nginx pod that mounts the secret mysecret in a volume on path /etc/foo.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run nginx-secret --image=nginx --namespace=pyf --dry-run=client -o yaml > 29-pod.yml
+       vi 29-pod.yml      
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: nginx-secret
+         name: nginx-secret
+         namespace: pyf
+       spec:
+         volumes:
+         - name: secret
+           secret:
+             secretName: mysecret
+         containers:
+         - image: nginx
+           name: nginx-secret
+           volumeMounts:
+           - name: secret
+             mountPath: "/etc/foo"
+             readOnly: true
+       ```
+       ```
+       k create -f 29-pod.yml
+       k describe pod nginx-secret -n pyf      
+       ```       
+       </details>          
