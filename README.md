@@ -293,3 +293,43 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k describe configmap/my-config -n pyf
        ```
        </details>  
+
+24. <b>Create a configMap called opt with value key5=val5. Create a new nginx-opt pod that loads the value from key key5 in an env variable called OPTIONS.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k create configmap opt --from-literal=key5=val5 --namespace=pyf      
+       ```
+       ```
+       k run nginx-opt --image=nginx --namespace=pyf --dry-run=client -o yaml > 24-pod.yml
+       vi 24-pod.yml      
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: nginx-opt
+         name: nginx-opt
+         namespace: pyf
+       spec:
+         containers:
+         - image: nginx
+           name: nginx-opt
+           env:
+             - name: OPTIONS
+               valueFrom:
+                 configMapKeyRef:
+                   name: opt
+                   key: key5      
+       ```
+       ``` 
+       k create -f 24-pod.yml      
+       ```       
+       ```      
+       k -n pyf exec -it nginx-opt -- env|grep -i OPTIONS
+       ```
+       </details>       
+      
+      
