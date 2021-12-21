@@ -413,4 +413,41 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k exec -n pyf nginx-cm -it -- ls /etc/spartaa
        ```
        </details>       
-             
+
+27. <b>Create an nginx-requests pod with requests cpu=100m, memory=256Mi and limits cpu=200m, memory=512Mi.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run nginx-requests --namespace=pyf --image=nginx --dry-run=client -o yaml > 27-pod.yml
+       ```
+       ```
+       vi 27-pod.yml      
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: nginx-requests
+         name: nginx-requests
+         namespace: pyf
+       spec:
+         containers:
+         - image: nginx
+           name: nginx-requests
+           resources:
+             requests:
+               memory: "256Mi"
+               cpu: "100m"
+             limits:
+               memory: "512Mi"
+               cpu: "200m"   
+       ```
+       ``` 
+       k create -f 27-pod.yml     
+       ```       
+       ```      
+       k describe pod/nginx-requests -n pyf 
+       ```
+       </details>           
