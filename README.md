@@ -451,3 +451,14 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k describe pod/nginx-requests -n pyf 
        ```
        </details>           
+
+28. <b>Create a secret called mysecret with values password=mypass and check its yaml.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k create secret generic mysecret --from-literal=password=mypass --namespace=pyf
+       k get secret/mysecret -n pyf
+       k describe secret/mysecret -n pyf
+             
+       ```
+       </details>        
