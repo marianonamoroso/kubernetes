@@ -503,7 +503,6 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        k get node -o json      
        ```
-       ```
        </details> 
       
 31. <b>Get CPU/memory utilization for nodes.</b> 
@@ -511,7 +510,6 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        
        ```
        k top nodes     
-       ```
        ```
        </details> 
  
@@ -521,7 +519,6 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        k run nginx-liveness --image=nginx --namespace=pyf --dry-run=client -o yaml > 32-pod.yml
        vi 32-pod.yml
-       ```
        ```
        ``` 
        apiVersion: v1
