@@ -497,3 +497,51 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k describe pod nginx-secret -n pyf      
        ```       
        </details>          
+30. <b>Get the list of nodes in JSON format and store it in a file.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k get node -o json      
+       ```
+       ```
+       </details> 
+      
+31. <b>Get CPU/memory utilization for nodes.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k top nodes     
+       ```
+       ```
+       </details> 
+ 
+32. <b>Create an nginx pod with a liveness probe that just runs the command ls. Check probe status.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run nginx-liveness --image=nginx --namespace=pyf --dry-run=client -o yaml > 32-pod.yml
+       vi 32-pod.yml
+       ```
+       ```
+       ``` 
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: nginx-liveness
+         name: nginx-liveness
+         namespace: pyf
+       spec:
+         containers:
+           - image: nginx
+             name: nginx-liveness
+             livenessProbe:
+               exec:
+                 command:
+                 - ls     
+       ```
+       ``` 
+       k create -f 32-pod.yml
+       ```      
+       </details>       
