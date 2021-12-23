@@ -675,5 +675,42 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get pod -n pyf
        k exec -it busybox-pvc -n pyf -- cp /etc/passwd /etc/foo/passwd      
        ```      
-       </details>   
+       </details>
       
+38. <b>Create a second pod which is identical with the one you just created (use different name). Connect to it and verify that '/etc/foo' contains the 'passwd' file. Delete the pods.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run busybox-second-pvc --image=busybox --namespace=pyf --dry-run=client -o yaml -- sleep 3600 > 38-pod.yml
+       vi 38-pod.yml
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: busybox-second-pvc
+         name: busybox-second-pvc
+         namespace: pyf
+       spec:
+         volumes:
+           - name: vol-pvc
+             persistentVolumeClaim:
+               claimName: mypvc-practice
+         containers:
+         - args:
+           - sleep
+           - "3600"
+           image: busybox
+           name: busybox-second-pvc
+           volumeMounts:
+             - mountPath: "/etc/foo/"
+               name: vol-pvc
+       ```
+       ```
+       k create -f 38-pod.yml 
+       k get pod -n pyf
+       k exec -it busybox-second-pvc -n pyf -- cat /etc/foo/passwd     
+       ```      
+       </details>         
