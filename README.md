@@ -613,7 +613,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get pv
        ```      
        </details>   
-35. <b>Create a PersistentVolumeClaim called 'mypvc-practice' requesting 400Mi with accessMode of 'ReadWriteOnce' and storageClassName of normal. Check the status of the PersistenVolume.</b> 
+36. <b>Create a PersistentVolumeClaim called 'mypvc-practice' requesting 400Mi with accessMode of 'ReadWriteOnce' and storageClassName of normal. Check the status of the PersistenVolume.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -639,3 +639,41 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get pvc -n pyf
        ```      
        </details>         
+37. <b>Create a busybox pod with command 'sleep 3600'. Mount the PersistentVolumeClaim mypvc-practice to '/etc/foo'. Connect to the 'busybox' pod, and copy the '/etc/passwd' file to '/etc/foo/passwd'.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run busybox-pvc --image=busybox --namespace=pyf --dry-run=client -o yaml -- sleep 3600 > 37-pod.yml
+       vi 37-pod.yml
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: busybox-pvc
+         name: busybox-pvc
+         namespace: pyf
+       spec:
+         volumes:
+           - name: vol-pvc
+             persistentVolumeClaim:
+               claimName: mypvc-practice
+         containers:
+         - args:
+           - sleep
+           - "3600"
+           image: busybox
+           name: busybox-pvc
+           volumeMounts:
+             - mountPath: "/etc/foo"
+               name: vol-pvc
+       ```
+       ```
+       k create -f 37-pod.yml 
+       k get pod -n pyf
+       k exec -it busybox-pvc -n pyf -- cp /etc/passwd /etc/foo/passwd      
+       ```      
+       </details>   
+      
