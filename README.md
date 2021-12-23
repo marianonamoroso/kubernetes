@@ -584,4 +584,32 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get pod -n pyf -o jsonpath='{.items[*].spec.containers[*].image}{"\n"}'
        ```
        </details>        
-  
+
+35. <b>Create a PersistentVolume of 1Gi, called 'myvolume-practice'. Make it have accessMode of 'ReadWriteOnce' and 'ReadWriteMany', storageClassName 'normal', mounted on hostPath '/etc/foo'. List all PersistentVolume</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       vi 35-pv.yml
+       ```
+       ```
+       apiVersion: v1
+       kind: PersistentVolume
+       metadata:
+         name: myvolume-practice
+       spec:
+         capacity:
+           storage: 1Gi
+         volumeMode: Filesystem
+         accessModes:
+           - ReadWriteOnce
+           - ReadWriteMany
+         persistentVolumeReclaimPolicy: Recycle
+         storageClassName: normal
+         hostPath:
+           path: /etc/foo
+       ```
+       ```
+       k create -f 35-pv.yml
+       k get pv
+       ```      
+       </details>              
