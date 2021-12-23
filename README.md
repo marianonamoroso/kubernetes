@@ -612,4 +612,30 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k create -f 35-pv.yml
        k get pv
        ```      
-       </details>              
+       </details>   
+35. <b>Create a PersistentVolumeClaim called 'mypvc-practice' requesting 400Mi with accessMode of 'ReadWriteOnce' and storageClassName of normal. Check the status of the PersistenVolume.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       vi 36-pv.yml
+       ```
+       ```
+       apiVersion: v1
+       kind: PersistentVolumeClaim
+       metadata:
+         name: mypvc-practice
+         namespace: pyf
+       spec:
+         accessModes:
+           - ReadWriteOnce
+         volumeMode: Filesystem
+         resources:
+           requests:
+             storage: 400Mi
+         storageClassName: normal
+       ```
+       ```
+       k create -f 36-pv.yml
+       k get pvc -n pyf
+       ```      
+       </details>         
