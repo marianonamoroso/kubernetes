@@ -540,5 +540,38 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        ``` 
        k create -f 32-pod.yml
+       k get pod -n pyf      
        ```      
-       </details>       
+       </details>
+33. <b>Create an nginx pod (that includes port 80) with an HTTP readinessProbe on path '/' on port 80.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run nginx-readiness --image=nginx --namespace=pyf --port=80 --dry-run=client -o yaml > 33-pod.yml
+       vi 33-pod.yml
+       ```
+       ``` 
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: nginx-readiness
+         name: nginx-readiness
+         namespace: pyf
+       spec:
+         containers:
+         - image: nginx
+           name: nginx-readiness
+           ports:
+           - containerPort: 80
+           readinessProbe:
+             httpGet:
+               path: /
+               port: 80
+       ```
+       ``` 
+       k create -f 33-pod.yml
+       k get pod -n pyf
+       ```      
+       </details>          
