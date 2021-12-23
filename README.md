@@ -543,7 +543,8 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get pod -n pyf      
        ```      
        </details>
-33. <b>Create an nginx pod (that includes port 80) with an HTTP readinessProbe on path '/' on port 80.</b> 
+
+32. <b>Create an nginx pod with a liveness probe that just runs the command ls. Check probe status.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -568,10 +569,19 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
            readinessProbe:
              httpGet:
                path: /
-               port: 80
+               port: 80     
        ```
        ``` 
        k create -f 33-pod.yml
-       k get pod -n pyf
+       k get pod -n pyf      
        ```      
-       </details>          
+       </details>  
+      
+34. <b>Use JSON PATH query to retrieve the osImages of all the nodes.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k get pod -n pyf -o jsonpath='{.items[*].spec.containers[*].image}{"\n"}'
+       ```
+       </details>        
+  
