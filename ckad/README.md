@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/8485060/146396141-6682bb2b-8712-465e-a0a1-241c99d88486.png" width=80 height="80"/>
+<img src="https://user-images.githubusercontent.com/8485060/147371404-edb634c8-d13c-4226-b632-b424bd999ad9.png" width=80 height=80/>
 <h1>CKAD</h1>
 This repository contains helpful use commands, exercises for preparing the CKAD.<br><br>
 <b>Exercises:</b> https://github.com/StenlyTU/K8s-training-official
