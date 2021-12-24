@@ -755,3 +755,35 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k exec -it -n pyf busybox-user -- id -u
        ```      
        </details>   
+
+40. <b>Create the YAML for an nginx pod that has capabilities "NET_ADMIN" and "SYS_TIME".</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run nginx-sec-pod --image=nginx --namespace=pyf --dry-run=client -o yaml > 40-pod.yaml
+       vi 40-pod.yml
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: nginx-sec-pod
+         name: nginx-sec-pod
+         namespace: pyf
+       spec:
+         containers:
+         - image: nginx
+           name: nginx-sec-pod
+           securityContext:
+             capabilities:
+               add: ["NET_ADMIN", "SYS_TIME"]
+       ```
+       ```
+       k create -f 40-pod.yml 
+       k get pod -n pyf
+       k exec -it -n pyf nginx-sec-pod -- cat /proc/1/status # CapPrm:00000000aa0435fb | CapEff:00000000aa0435fb
+       ```      
+       </details>    
+      
