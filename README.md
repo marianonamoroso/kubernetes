@@ -793,30 +793,10 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k create serviceaccount -n pyf pvviewer-practice
        k create clusterrole pvviewer-role-practice -n pyf --resource=pv --verb=list
        k create clusterrolebinding -n pyf pvviewer-role-binding-practice --clusterrole=pvviewer-role-practice --serviceaccount=pyf:pvviewer-practice
+       ```
+       ```
        k get -n pyf serviceaccount pvviewer-practice      
        k get -n pyf clusterrole pvviewer-role-practice       
        k describe clusterrolebinding pvviewer-role-binding-practice
-       ```
-       ```
-       apiVersion: v1
-       kind: Pod
-       metadata:
-         creationTimestamp: null
-         labels:
-           run: nginx-sec-pod
-         name: nginx-sec-pod
-         namespace: pyf
-       spec:
-         containers:
-         - image: nginx
-           name: nginx-sec-pod
-           securityContext:
-             capabilities:
-               add: ["NET_ADMIN", "SYS_TIME"]
-       ```
-       ```
-       k create -f 40-pod.yml 
-       k get pod -n pyf
-       k exec -it -n pyf nginx-sec-pod -- cat /proc/1/status # CapPrm:00000000aa0435fb | CapEff:00000000aa0435fb
        ```      
        </details>         
