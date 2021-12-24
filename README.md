@@ -497,7 +497,9 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k describe pod nginx-secret -n pyf      
        ```       
        </details> 
-<h2>Observability</h2>      
+      
+<h2>Observability</h2>  
+      
 30. <b>Get the list of nodes in JSON format and store it in a file.</b> 
        <details><summary>Show</summary>
        
@@ -584,8 +586,10 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        k get pod -n pyf -o jsonpath='{.items[*].spec.containers[*].image}{"\n"}'
        ```
-       </details>        
+       </details> 
+      
 <h2>Storage</h2>  
+      
 35. <b>Create a PersistentVolume of 1Gi, called 'myvolume-practice'. Make it have accessMode of 'ReadWriteOnce' and 'ReadWriteMany', storageClassName 'normal', mounted on hostPath '/etc/foo'. List all PersistentVolume</b> 
        <details><summary>Show</summary>
        
@@ -614,6 +618,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get pv
        ```      
        </details>   
+      
 36. <b>Create a PersistentVolumeClaim called 'mypvc-practice' requesting 400Mi with accessMode of 'ReadWriteOnce' and storageClassName of normal. Check the status of the PersistenVolume.</b> 
        <details><summary>Show</summary>
        
@@ -714,14 +719,16 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get pod -n pyf
        k exec -it busybox-second-pvc -n pyf -- cat /etc/foo/passwd     
        ```      
-       </details>         
+       </details>
+      
 <h2>Security</h2>  
+      
 39. <b>Create busybox-user pod that runs sleep for 1 hour and has user ID set to 101. Check the UID from within the container.</b> 
        <details><summary>Show</summary>
        
        ```
-       k run busybox-second-pvc --image=busybox --namespace=pyf --dry-run=client -o yaml -- sleep 3600 > 38-pod.yml
-       vi 38-pod.yml
+       k run busybox-user --image=busybox --namespace=pyf --dry-run=client -o yaml -- sleep 3600 > 39-pod.yml
+       vi 39-pod.yml
        ```
        ```
        apiVersion: v1
@@ -729,27 +736,22 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        metadata:
          creationTimestamp: null
          labels:
-           run: busybox-second-pvc
-         name: busybox-second-pvc
+           run: busybox-user
+         name: busybox-user
          namespace: pyf
        spec:
-         volumes:
-           - name: vol-pvc
-             persistentVolumeClaim:
-               claimName: mypvc-practice
+         securityContext:
+           runAsUser: 101
          containers:
          - args:
            - sleep
            - "3600"
            image: busybox
-           name: busybox-second-pvc
-           volumeMounts:
-             - mountPath: "/etc/foo/"
-               name: vol-pvc
+           name: busybox-user
        ```
        ```
-       k create -f 38-pod.yml 
+       k create -f 39-pod.yml 
        k get pod -n pyf
-       k exec -it busybox-second-pvc -n pyf -- cat /etc/foo/passwd     
+       k exec -it -n pyf busybox-user -- id -u
        ```      
        </details>   
