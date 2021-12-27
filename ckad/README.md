@@ -825,3 +825,35 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
 
        </details>   
+
+44. <b>Convert the ClusterIP to NodePort for the same service and find the NodePort. Hit the service(create temp busybox pod) using Node's IP and Port.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k get service nginx-1 -n pyf -o yaml > 44-service.yml
+       vi 44-service.yml 
+       ```
+       ```
+       apiVersion: v1
+       kind: Service
+       metadata:
+         name: nginx-1
+         namespace: pyf
+       spec:
+         ports:
+         - port: 80
+           protocol: TCP
+           targetPort: 80
+         selector:
+           run: nginx-1
+         sessionAffinity: None
+         type: NodePort      
+       ```      
+       ```      
+       k delete service nginx-1 -n pyf
+       k create -f 44-service.yml      
+       k get service/nginx-1 -n pyf      
+       ```
+
+       </details>         
+      
