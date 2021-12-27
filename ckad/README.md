@@ -923,9 +923,8 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        <details><summary>Show</summary>
        
        ```
-       k run nginx-resolver --image=nginx --namespace=pyf
-       k expose pod nginx-resolver --port=53 --target-port=53 --namespace=pyf --name=nginx-resolver-service
-       k run --namespace=pyf --image=busybox:1.28 --rm -it busybox-temp-dns -- sh # nslookup nginx-resolver-service.pyf        
+       kubectl get nodes -o jsonpath='{.items[*].metadata.name}{"\n"}{.items[*].status.addresses[?(@.type=="InternalIP")].address}{"\n"}'
+       k get node -o wide
     
        ```      
 
