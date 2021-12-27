@@ -972,7 +972,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
        </details>         
 
- 49. <b>Create a Pod called redis-storage with image redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod. Use volumeMount with mountPath = /data/redis.</b> 
+49. <b>Create a Pod called redis-storage with image redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod. Use volumeMount with mountPath = /data/redis.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1005,4 +1005,17 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
              
        </details>        
-      
+ 
+50. <b>Create a new deployment called nginx-deploy, with image nginx:1.16 and 1 replica. Record the version. Next upgrade the deployment to version 1.17 using rolling update. Make sure that the version upgrade is recorded in the resource annotation.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k create deployment nginx-deploy --image=nginx:1.16 --replicas=1 --namespace=pyf
+       k set image deployment nginx-deploy nginx=nginx:1.17 --namespace=pyf --record=true
+       k describe deployment.apps/nginx-deploy -n pyf |grep -i image
+       k rollout history deployment nginx-deploy -n pyf      
+       ```
+       ```
+       ```      
+                    
+       </details>          
