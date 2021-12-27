@@ -964,7 +964,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        ```
        k create -f 48-pod.yml 
-       k get pod pod-taint-toleration -n pyf -o wide #woker2     
+       k get pod pod-taint-toleration -n pyf -o wide # worker2     
        ```      
 
        </details>         
