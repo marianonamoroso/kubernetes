@@ -894,7 +894,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
              port: 80     
        ```      
        ```      
-       k create -f 45-service.yml
+       k create -f 45-np.yml
        k get service/nginx-last -n pyf # CLUSTER_IP
        ```
        ```
