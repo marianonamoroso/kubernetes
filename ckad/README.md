@@ -852,6 +852,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```      
        k delete service nginx-1 -n pyf
        k create -f 44-service.yml      
+       ```
        ```      
        k get service/nginx-1 -n pyf #NODE_PORT
        k get pod nginx-1 -n pyf -o wide #NODE_NAME 
