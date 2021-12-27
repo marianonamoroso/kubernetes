@@ -935,7 +935,9 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        <details><summary>Show</summary>
        
        ```
-       kubectl get nodes -o jsonpath='{.items[*].metadata.name}{"\n"}{.items[*].status.addresses[?(@.type=="InternalIP")].address}{"\n"}'
+       k taint node worker2 spray=mortein:NoSchedule
+       k run pod-taint --image=nginx --namespace=pyf
+       k get pod pod-taint -n pyf -o wide      
        ```
        ```      
        k get node -o wide
