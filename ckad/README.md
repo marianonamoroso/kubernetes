@@ -930,3 +930,15 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```      
 
        </details>      
+
+48. <b>Taint one worker node to be Unschedulable. Once done, create a pod called dev-redis with image redis:alpine to ensure workloads are not scheduled to the tainted node. Finally, create a new pod called prod-redis with image redis:alpine with toleration to be scheduled on the tainted node.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       kubectl get nodes -o jsonpath='{.items[*].metadata.name}{"\n"}{.items[*].status.addresses[?(@.type=="InternalIP")].address}{"\n"}'
+       ```
+       ```      
+       k get node -o wide
+       ```      
+
+       </details>         
