@@ -807,6 +807,8 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        
        ```
        k run nginx-1 --image=nginx --namespace=pyf --port=80 --expose
+       ```
+       ```      
        k get pod/nginx-1  -n pyf
        k get service/nginx-1 -n pyf       
        k describe service/nginx-1 -n pyf      
