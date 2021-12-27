@@ -937,7 +937,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        k taint node worker2 spray=mortein:NoSchedule
        k run pod-taint --image=nginx --namespace=pyf
-       k get pod pod-taint -n pyf -o wide      
+       k get pod pod-taint -n pyf -o wide # worker1    
        ```
        ```      
        k run pod-taint-toleration --image=nginx --namespace=pyf --dry-run=client -o yaml> 48-pod.yml
@@ -964,7 +964,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        ```
        k create -f 48-pod.yml 
-       k get pod pod-taint-toleration -n pyf -o wide      
+       k get pod pod-taint-toleration -n pyf -o wide #woker2     
        ```      
 
        </details>         
