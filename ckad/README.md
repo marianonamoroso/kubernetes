@@ -857,8 +857,6 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get service/nginx-1 -n pyf #NODE_PORT
        k get pod nginx-1 -n pyf -o wide #NODE_NAME 
        k get node -o wide #NODE_IP
-       ```
-       ```
        wget -O- $NODE_IP:$NODE_PORT     
        ```      
 
