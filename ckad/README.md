@@ -940,7 +940,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get pod pod-taint -n pyf -o wide # worker1    
        ```
        ```      
-       k run pod-taint-toleration --image=nginx --namespace=pyf --dry-run=client -o yaml> 48-pod.yml
+       k run pod-taint-toleration-redis --image=nginx --namespace=pyf --dry-run=client -o yaml> 48-pod.yml
        vi 48-pod.yml      
        ``` 
        ``` 
@@ -949,8 +949,8 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        metadata:
          creationTimestamp: null
          labels:
-           run: pod-taint-toleration
-         name: pod-taint-toleration
+           run: pod-taint-toleration-redis
+         name: pod-taint-toleration-redis
          namespace: pyf
        spec:
          tolerations:
@@ -959,7 +959,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
            value: "mortein"
            effect: "NoSchedule"
          containers:
-         - image: nginx
+         - image: redis
            name: pod-taint-toleration      
        ```
        ```
@@ -971,3 +971,38 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```      
 
        </details>         
+
+ 49. <b>Create a Pod called redis-storage with image redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod. Use volumeMount with mountPath = /data/redis.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run redis-storage --namespace=pyf --image=redis:alpine --dry-run=client -o yaml > 49-pod.yml
+       vi 49-pod.yml 
+       ```
+       ```      
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: redis-storage
+         name: redis-storage
+         namespace: pyf
+       spec:
+         volumes:
+         - name: cache-volume
+           emptyDir: {}
+         containers:
+         - image: redis:alpine
+           name: redis-storage
+           volumeMounts:
+           - name: cache-volume
+             mountPath: /data/redis     
+       ``` 
+       ``` 
+       k create -f 49-pod.yml      
+       k describe pod/redis-storage -n pyf|grep -i mounts -A2 
+       ```
+             
+       </details>        
+      
