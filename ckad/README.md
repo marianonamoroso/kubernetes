@@ -861,4 +861,46 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```      
 
        </details>         
-      
+
+45. <b>Create an nginx-last deployment of 2 replicas, expose it via a ClusterIP service on port 80. Create a NetworkPolicy so that only pods with labels 'access: granted' can access the deployment.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k create deployment nginx-last --image=nginx --replicas=2 --namespace=pyf --port=80      
+       k expose deployment nginx-last --namespace=pyf --target-port=80
+       k describe service/nginx-last -n pyf
+       k get pod -n pyf --show-labels # app=nginx-last     
+       vi 45-np.yml 
+       ```
+       ```
+       apiVersion: networking.k8s.io/v1
+       kind: NetworkPolicy
+       metadata:
+         name: np-nginx-last-pyf
+         namespace: pyf
+       spec:
+         podSelector:
+           matchLabels:
+             app: nginx-last 
+         policyTypes:
+         - Ingress
+         ingress:
+         - from:
+           - podSelector:
+               matchLabels:
+                 access: granted
+           ports:
+           - protocol: TCP
+             port: 80     
+       ```      
+       ```      
+       k create -f 45-service.yml
+       k get service/nginx-last -n pyf # CLUSTER_IP
+       ```
+       ```
+       k run busybox-temp --image=busybox --rm -it --namespace=pyf -- wget -O- $CLUSTER_IP:80 (you CANNOT connect to the pod)     
+       k run busybox-temp --image=busybox --labels=access=granted --rm -it --namespace=pyf -- wget -O- $CLUSTER_IP:80  (you CAN connect to the pod)    
+    
+       ```      
+
+       </details>         
