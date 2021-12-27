@@ -940,7 +940,31 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get pod pod-taint -n pyf -o wide      
        ```
        ```      
-       k get node -o wide
+       k run pod-taint-toleration --image=nginx --namespace=pyf --dry-run=client -o yaml> 48-pod.yml
+       vi 48-pod.yml      
+       ``` 
+       ``` 
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         creationTimestamp: null
+         labels:
+           run: pod-taint-toleration
+         name: pod-taint-toleration
+         namespace: pyf
+       spec:
+         tolerations:
+         - key: "spray"
+           operator: "Equal"
+           value: "mortein"
+           effect: "NoSchedule"
+         containers:
+         - image: nginx
+           name: pod-taint-toleration      
+       ```
+       ```
+       k create -f 48-pod.yml 
+       k get pod pod-taint-toleration -n pyf -o wide      
        ```      
 
        </details>         
