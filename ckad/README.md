@@ -802,7 +802,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
 <h2>Networking</h2>  
 
-41. <b>Create a pod with image nginx called nginx-1 and expose its port 80.</b> 
+42. <b>Create a pod with image nginx called nginx-1 and expose its port 80.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -816,3 +816,12 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        </details>            
  
+43. <b>Get service's ClusterIP, create a temp busybox-1 pod and 'hit' that IP with wget.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k get service -n pyf      
+       k run --rm -it --image=busybox busybox-1 --namespace=pyf -- wget -O- $CLUSTER_IP:80       
+       ```
+
+       </details>   
