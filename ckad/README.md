@@ -1001,7 +1001,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ``` 
        ``` 
        k create -f 49-pod.yml      
-       k describe pod/redis-storage -n pyf|grep -i mounts -A2 
+       k describe pod/redis-storage -n pyf|grep -i mounts -A1 
        ```
              
        </details>        
