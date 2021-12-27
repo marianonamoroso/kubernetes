@@ -924,8 +924,9 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        
        ```
        kubectl get nodes -o jsonpath='{.items[*].metadata.name}{"\n"}{.items[*].status.addresses[?(@.type=="InternalIP")].address}{"\n"}'
+       ```
+       ```      
        k get node -o wide
-    
        ```      
 
        </details>      
