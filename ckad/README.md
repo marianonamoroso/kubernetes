@@ -799,3 +799,16 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k describe clusterrolebinding pvviewer-role-binding-practice
        ```      
        </details>         
+
+<h2>Networking</h2>  
+
+41. <b>Create a pod with image nginx called nginx-1 and expose its port 80.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run nginx-1 --image=nginx --namespace=pyf --port=80
+       k get pod/nginx-1  -n pyf
+       k describe pod/nginx-1 -n pyf
+       ```
+       </details>            
+ 
