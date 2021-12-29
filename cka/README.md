@@ -1,6 +1,7 @@
 <img src="https://user-images.githubusercontent.com/8485060/147371404-edb634c8-d13c-4226-b632-b424bd999ad9.png" width=80 height=80/>
 <h1>CKA</h1>
-This repository contains helpful use commands, exercises for preparing the CKA. I recommend you tackle the CKAD first in order to gain developer skills for managing deployments, multi-containers, services, network policies, ingress, config maps, secrets, and storage.<br><br>
+This repository contains helpful use commands, exercises for preparing the CKA.<br><br>
+Thought: <i>I recommend you tackle the CKAD first in order to gain developer skills for managing deployments, multi-containers, services, network policies, ingress, config maps, secrets, and storage.</i><br><br>
 
 <h2>Variables & Useful Stuff</h2>
 
