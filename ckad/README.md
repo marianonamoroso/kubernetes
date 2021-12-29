@@ -1069,7 +1069,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```      
        </details>
 
-53. <b>Create pod with nginx container exposed at port 80. Add a busybox init container which downloads a page using "wget -O /work-dir/index.html http://pyf.com". Make a volume of type emptyDir and mount it in both containers. For the nginx container, mount it on "/usr/share/nginx/html" and for the initcontainer, mount it on "/work-dir". When done, get the IP of the created pod and create a busybox pod and run "wget -O- IP".</b> 
+53. <b>Create pod with nginx container exposed at port 80. Add a busybox init container which downloads a page using "wget -O /work-dir/index.html http://protectyourflag.com". Make a volume of type emptyDir and mount it in both containers. For the nginx container, mount it on "/usr/share/nginx/html" and for the initcontainer, mount it on "/work-dir". When done, get the IP of the created pod and create a busybox pod and run "wget -O- IP".</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1092,7 +1092,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
          - args:
            - /bin/sh
            - -c
-           - wget -O /work-dir/index.html http://pyf.com
+           - wget -O /work-dir/index.html http://protectyourflag.com
            image: busybox
            name: multi-init-container-busybox-1
            volumeMounts:
