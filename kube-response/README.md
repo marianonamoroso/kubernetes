@@ -11,7 +11,5 @@ REQUIRED: <b>kubectl</b><br>
 [3 - Deployments load] <br>
 [4 - Logging running pods]<br>
 <br>
-![image](https://user-images.githubusercontent.com/8485060/147680592-610588ee-dea4-414b-ae77-987a073bc926.png)
-
 
 
