@@ -1067,4 +1067,52 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        k -n pyf exec busybox-multi-container -c busybox-container-2 -it -- ls      
        ```      
-       </details>       
+       </details>
+
+53. <b>Create pod with nginx container exposed at port 80. Add a busybox init container which downloads a page using "wget -O /work-dir/index.html http://pyf.com". Make a volume of type emptyDir and mount it in both containers. For the nginx container, mount it on "/usr/share/nginx/html" and for the initcontainer, mount it on "/work-dir". When done, get the IP of the created pod and create a busybox pod and run "wget -O- IP".</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run multi-init-container --image=busybox --namespace=pyf --dry-run=client -o yaml -- /bin/sh -c 'wget -O /work-dir/index.html http://pyf.com' > 53-pod.yml
+       vi 53-pod.yml      
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         labels:
+           run: multi-init-container
+         name: multi-init-container
+         namespace: pyf
+       spec:
+         volumes:
+         - name: vol-empty-dir
+           emptyDir: {}
+         initContainers:
+         - args:
+           - /bin/sh
+           - -c
+           - wget -O /work-dir/index.html http://pyf.com
+           image: busybox
+           name: multi-init-container-busybox-1
+           volumeMounts:
+           - name: vol-empty-dir
+             mountPath: "/work-dir"
+         containers:
+         - name: multi-init-container-nginx-2
+           image: nginx  
+           volumeMounts:
+           - name: vol-empty-dir
+             mountPath: "/usr/share/nginx/html"
+           ports:
+           - containerPort: 80      
+       ```      
+       ```
+       k create -f 53-pod.yml
+       k get -n pyf pod/multi-init-container
+       k describe pod -n pyf multi-init-container      
+       ```    
+       ```
+       k run --image=busybox temp --rm -it --namespace=pyf -- wget -O- -T 5 10.44.0.9:80      
+       ```      
+       </details>      
