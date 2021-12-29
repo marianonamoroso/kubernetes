@@ -1,6 +1,6 @@
 #!/bin/bash
 # TOOL: kube-response.sh
-# NEEDED BINS: kubectl & aws-sso-magic
+# NEEDED BINS: kubectl
 # NAMESPACE: ns
 # AUTHOR: MA
 
@@ -15,11 +15,10 @@ while [ $exit == 0 ]; do
     
     echo ""
     echo "[0 - Exit]"
-    echo "[1 - EKS conn]"
-    echo "[2 - Pods load]"
-    echo "[3 - Nodes load]"
-    echo "[4 - Deployments load]"
-    echo "[5 - Logging running pods]"
+    echo "[1 - Pods load]"
+    echo "[2 - Nodes load]"
+    echo "[3 - Deployments load]"
+    echo "[4 - Logging running pods]"
     echo ""
     read -p "Please, select the number: " option
 
@@ -31,17 +30,7 @@ while [ $exit == 0 ]; do
                 let exit=1
                 ;;
             
-            1) # [1 - EKS CONNECTION]
-                aws-sso-magic login --profile production-admin
-                wait; tput setaf 2 ;echo "Login completed: aws-sso-magic login --profile production-admin";tput sgr0; echo ""
-                aws-sso-magic login --eks --cluster ns-prod
-                wait; tput setaf 2 ;echo "Cluster ns-prod configured:aws-sso-magic login --eks --cluster ns-prod";tput sgr0; echo ""
-                export AWS_PROFILE=production-admin
-                wait; tput setaf 2 ;echo "AWS_PROFILE configured:export AWS_PROFILE=production-admin";tput sgr0; echo ""
-                ;;
-
-
-            2) # [2 - PODS LOAD]
+            1) # [1 - PODS LOAD]
                 echo ""
                 tput setaf 2; echo "[Pods]";tput sgr0;
                 kubectl top pods -n ns
@@ -50,14 +39,14 @@ while [ $exit == 0 ]; do
                 kubectl get pods -o wide -n ns
                 ;;
             
-            3) # [3 - NODES LOAD]
+            2) # [2 - NODES LOAD]
                 echo ""
                 tput setaf 2; echo "[Nodes]";tput sgr0;
                 kubectl top nodes -n ns
                 echo ""
                 ;;
             
-            4) # [4 - DEPLOYMENTS]
+            3) # [3 - DEPLOYMENTS]
                 echo ""
                 tput setaf 2; echo "[Deployments]";tput sgr0;
                 kubectl get deployments -n ns
@@ -67,7 +56,7 @@ while [ $exit == 0 ]; do
 
                 ;;
             
-            5)  # [5 - LOGGING RUNNING PODS]
+            4)  # [4 - LOGGING RUNNING PODS]
                 echo ""
                 tput setaf 2; echo "[Logging running pods]";tput sgr0;
                 echo ""
