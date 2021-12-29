@@ -1030,11 +1030,38 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       
        </details>
 
-52. <b>Multi Containers.</b> 
+52. <b>Create a Pod with two containers, both with image busybox and command "echo hello; sleep 3600". Connect to the second container and run 'ls'.</b> 
        <details><summary>Show</summary>
        
        ```
-       XXXXX    
-       ```     
-                    
+       k run busybox-multi-container --image=busybox --namespace=pyf --dry-run=client -o yaml -- /bin/sh -c "echo hello; sleep 3600" > 52-pod.yml
+       vi 52-pod.yml      
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         labels:
+           run: busybox-multi-container
+         name: busybox-multi-container
+         namespace: pyf
+       spec:
+         containers:
+         - args:
+           - /bin/sh
+           - -c
+           - echo hello; sleep 3600
+           image: busybox
+           name: busybox-container-1
+         - args:
+           - /bin/sh
+           - -c
+           - echo hello; sleep 3600
+           image: busybox
+           name: busybox-container-2      
+       ```      
+       ```
+       k create -f 52-pod.yml
+       k get -n pyf pod/busybox-multi-container      
+       ```      
        </details>       
