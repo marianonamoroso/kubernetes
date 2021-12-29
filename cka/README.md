@@ -9,4 +9,40 @@ alias k='kubectl'
 export do='—dry-run=client -o yaml'
 kubectl config set-context <your_context> --namespace=pyf # avoiding type the namespace on each commands
 ```
-<h2>Installation</h2>
+<h2>Administration</h2>
+
+<h3>Installation</h3>
+
+1. <b>XXXXX</b>.
+      <details><summary>Show</summary>
+
+      ```
+      XXXXX
+      ```
+      </details>
+
+2. <b>Join Worker Nodes</b>.
+      <details><summary>Show</summary>
+
+      ```
+      XXXXX
+      ```
+      </details>
+
+<h3>Backup & Restore</h3>
+
+<h3>Upgrade Kubernetes Cluster</h3>
+
+<h3>Contexts</h3>
+
+<h2>Security</h2>
+
+<h3>Certificates</h3>
+
+<h3>Roles</h3>
+
+<h3>Service Account</h3>
+
+<h2>Troubleshooting</h2>
+
+<h2>JSONPath</h2>
