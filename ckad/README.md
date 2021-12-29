@@ -1063,5 +1063,9 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        k create -f 52-pod.yml
        k get -n pyf pod/busybox-multi-container      
+       ```
+       k -n pyf exec busybox-multi-container -c busybox-container-2 -it -- ls      
+       ```
+             
        ```      
        </details>       
