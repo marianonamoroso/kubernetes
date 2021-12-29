@@ -861,7 +861,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```      
 
        </details>         
-
+    
 45. <b>Create an nginx-last deployment of 2 replicas, expose it via a ClusterIP service on port 80. Create a NetworkPolicy so that only pods with labels 'access: granted' can access the deployment.</b> 
        <details><summary>Show</summary>
        
@@ -905,9 +905,20 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
        </details>         
 
+46. <b>Ingress.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       XXXXX    
+       ```
+       ```
+       ```      
+                    
+       </details>      
+      
 <h2>Challenging</h2>  
 
-46. <b>Create an nginx pod called nginx-resolver using image nginx, expose it internally with a service called nginx-resolver-service. Test that you are able to look up the service and pod names from within the cluster. Use the image: busybox:1.28 for dns lookup.</b> 
+47. <b>Create an nginx pod called nginx-resolver using image nginx, expose it internally with a service called nginx-resolver-service. Test that you are able to look up the service and pod names from within the cluster. Use the image: busybox:1.28 for dns lookup.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -919,7 +930,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
        </details>
 
-47. <b>List the InternalIP of all nodes of the cluster.</b> 
+48. <b>List the InternalIP of all nodes of the cluster.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -931,7 +942,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
        </details>      
 
-48. <b>Taint one worker node to be Unschedulable. Once done, create a pod called dev-redis with image redis:alpine to ensure workloads are not scheduled to the tainted node. Finally, create a new pod called prod-redis with image redis:alpine with toleration to be scheduled on the tainted node.</b> 
+49. <b>Taint one worker node to be Unschedulable. Once done, create a pod called dev-redis with image redis:alpine to ensure workloads are not scheduled to the tainted node. Finally, create a new pod called prod-redis with image redis:alpine with toleration to be scheduled on the tainted node.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -972,7 +983,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
        </details>         
 
-49. <b>Create a Pod called redis-storage with image redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod. Use volumeMount with mountPath = /data/redis.</b> 
+50. <b>Create a Pod called redis-storage with image redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod. Use volumeMount with mountPath = /data/redis.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1006,7 +1017,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
              
        </details>        
  
-50. <b>Create a new deployment called nginx-deploy, with image nginx:1.16 and 1 replica. Record the version. Next upgrade the deployment to version 1.17 using rolling update. Make sure that the version upgrade is recorded in the resource annotation.</b> 
+51. <b>Create a new deployment called nginx-deploy, with image nginx:1.16 and 1 replica. Record the version. Next upgrade the deployment to version 1.17 using rolling update. Make sure that the version upgrade is recorded in the resource annotation.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1019,4 +1030,15 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        ```      
                     
-       </details>          
+       </details>
+
+52. <b>Multi Containers.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       XXXXX    
+       ```
+       ```
+       ```      
+                    
+       </details>       
