@@ -3,8 +3,7 @@
 <b>kube-reponse gives you shortcuts for listing and exporting information of your nodes, pods and deployments via cli without memorizing some options with kubectl</b><br>
 TOOL: <b>kube-response.sh</b><br>
 AUTHOR: <b>Mariano Amoroso</b><br>
-REQUIRED: <b>kubectl & aws-sso-magic</b><br>
-REPO: aws-sso-magic https://github.com/javiortizmol/aws-sso-magic
+REQUIRED: <b>kubectl</b><br>
 <br>
 <h3>Features</h3>
 [1 - EKS conn] <br>
