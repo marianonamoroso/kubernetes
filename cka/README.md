@@ -43,8 +43,8 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
 <h3>Service Account</h3>
 
-<h2>Troubleshooting</h2>
-
 <h2>Observability</h2>
 
 <h3>JSONPath</h3>
+
+<h2>Troubleshooting</h2>
