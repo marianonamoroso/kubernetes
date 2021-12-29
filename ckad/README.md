@@ -910,9 +910,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        
        ```
        XXXXX    
-       ```
-       ```
-       ```      
+       ```  
                     
        </details>      
       
@@ -1024,12 +1022,12 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k create deployment nginx-deploy --image=nginx:1.16 --replicas=1 --namespace=pyf
        k set image deployment nginx-deploy nginx=nginx:1.17 --namespace=pyf --record=true
        k describe deployment.apps/nginx-deploy -n pyf |grep -i image
+       ```
+       ```      
        k rollout undo deployment nginx-deploy -n pyf --record=true        
        k rollout history deployment nginx-deploy -n pyf      
        ```
-       ```
-       ```      
-                    
+      
        </details>
 
 52. <b>Multi Containers.</b> 
@@ -1037,8 +1035,6 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        
        ```
        XXXXX    
-       ```
-       ```
-       ```      
+       ```     
                     
        </details>       
