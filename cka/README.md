@@ -21,7 +21,7 @@ This repository contains helpful use commands, exercises for preparing the CKA. 
     - SSH Key
     - Name: worker-node
 
-<h2>SSH Cluster Connection:</h2>
+<h2>SSH Instance Connection</h2>
 
 ```
 chmod 400 <your_key>.pem
