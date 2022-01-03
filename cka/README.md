@@ -2,6 +2,11 @@
 <h1>CKA</h1>
 This repository contains helpful use commands, exercises for preparing the CKA. I recommend you tackle the CKAD first in order to gain developer skills for managing deployments, multi-containers, services, network policies, ingress, configmaps, secrets, and storage. The stuff learned on your CKAD journey will let you be more comfortable to continue working with the CKA exam.<br><br>
 
+<b>Official Documentation:</b>
+
+- Installing kubeadm: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+- Creating a cluster with kubeadm: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+
 <h2>Variables & Useful Stuff</h2>
 
 ```
