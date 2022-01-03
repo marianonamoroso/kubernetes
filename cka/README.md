@@ -22,7 +22,7 @@ This repository contains helpful use commands, exercises for preparing the CKA. 
   - SSH Key
   - Name: worker-node
 
-<h3>SSH Instance Connection</h3>
+<h3>SSH Connection</h3>
 
 ```
 chmod 400 <your_key>.pem
