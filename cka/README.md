@@ -4,8 +4,7 @@ This repository contains helpful use commands, exercises for preparing the CKA. 
 
 <b>Official Documentation:</b>
 
-- Installing kubeadm: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
-- Creating a cluster with kubeadm: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+- Bootstrapping clusters with kubeadm: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/
 
 <h2>Variables & Useful Stuff</h2>
 
