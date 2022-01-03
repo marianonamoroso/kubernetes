@@ -2,6 +2,23 @@
 <h1>CKA</h1>
 This repository contains helpful use commands, exercises for preparing the CKA. I recommend you tackle the CKAD first in order to gain developer skills for managing deployments, multi-containers, services, network policies, ingress, configmaps, secrets, and storage. The stuff learned on your CKAD journey will let you be more comfortable to continue working with the CKA exam.<br><br>
 
+<b>Infrastructure Provisioned on AWS</b>
+
+- <b>EC2 Instances</b>
+  - Master Node
+    - OS: Ubuntu Server 20.04 LTS (HVM)
+    - Type: t2.medium (2 vCPU and 4 Memory)
+    - SSH Key
+    - Name: master-node
+  - Worker Nodes
+    - OS: Ubuntu Server 20.04 LTS (HVM)
+    - Type: t2.large (4 vCPU and 8 Memory)
+    - Quantity: 2
+    - SSH Key
+    - Name: worker-node
+
+- 
+
 <b>Official Documentation:</b>
 
 - Bootstrapping clusters with kubeadm: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/
