@@ -8,32 +8,27 @@ This repository contains helpful use commands, exercises for preparing the CKA. 
 
 <h2>AWS Infrastructure</h2>
 
-- <b>EC2 Instances</b>
-  - <b>Master Node</b>
-    - OS: Ubuntu Server 20.04 LTS (HVM)
-    - Type: t2.medium (2 vCPU and 4 Memory)
-    - SSH Key
-    - Name: master-node
-  - <b>Worker Nodes</b>
-    - OS: Ubuntu Server 20.04 LTS (HVM)
-    - Type: t2.large (4 vCPU and 8 Memory)
-    - Quantity: 2
-    - SSH Key
-    - Name: worker-node
+<h3>EC2 Instances</h3>
 
-<h2>SSH Instance Connection</h2>
+- <b>Master Node</b>
+  - OS: Ubuntu Server 20.04 LTS (HVM)
+  - Type: t2.medium (2 vCPU and 4 Memory)
+  - SSH Key
+  - Name: master-node
+- <b>Worker Nodes</b>
+  - OS: Ubuntu Server 20.04 LTS (HVM)
+  - Type: t2.large (4 vCPU and 8 Memory)
+  - Quantity: 2
+  - SSH Key
+  - Name: worker-node
+
+<h3>SSH Instance Connection</h3>
 
 ```
 chmod 400 <your_key>.pem
 ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 ```
-<h2>Variables & Useful Stuff</h2>
 
-```
-alias k='kubectl'
-export do='—dry-run=client -o yaml'
-kubectl config set-context <your_context> --namespace=pyf # avoiding type the namespace on each commands
-```
 <h2>Administration</h2>
 
 <h3>Installation</h3>
@@ -53,6 +48,14 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       XXXXX
       ```
       </details>
+
+<h3>Variables & Useful Stuff</h3>
+
+```
+alias k='kubectl'
+export do='—dry-run=client -o yaml'
+kubectl config set-context <your_context> --namespace=pyf # avoiding type the namespace on each commands
+```
 
 <h3>Backup & Restore</h3>
 
