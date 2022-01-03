@@ -1,6 +1,9 @@
 <img src="https://user-images.githubusercontent.com/8485060/147371404-edb634c8-d13c-4226-b632-b424bd999ad9.png" width=80 height=80/>
 <h1>CKA</h1>
-This repository contains helpful use commands, exercises for preparing the CKA. I recommend you tackle the CKAD first in order to gain developer skills for managing deployments, multi-containers, services, network policies, ingress, configmaps, secrets, and storage. The stuff learned on your CKAD journey will let you be more comfortable to continue working with the CKA exam.<br>
+This repository contains helpful use commands, exercises for preparing the CKA.<br><br>  
+
+I recommend you tackle the CKAD first in order to gain developer skills for managing deployments, multi-containers, services, network policies, ingress, configmaps, secrets, and storage. The stuff learned on your CKAD journey will let you be more comfortable to continue working with the CKA exam. You can check the following repo: https://github.com/marianonamoroso/kubernetes/tree/main/ckad<br>
+
 Finally, I'll share with you my environment used for practicing CKA's required tasks. FYI, I spent an extra cost in order to run AWS infrastructure needed (medium and large instance types)<br><br>
 
 <b>Official Documentation:</b>
