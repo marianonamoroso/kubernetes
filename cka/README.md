@@ -32,3 +32,30 @@ Finally, I'll share with you my environment used for practicing CKA's required t
 chmod 400 <your_key>.pem
 ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 ```
+<h2>Administration</h2>
+
+<h3>Installation</h3>
+
+1. <b>Swap</b>
+      <details><summary>Show</summary>
+
+      ```
+      ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address> sudo swapoff -a # you have to execute the same command on each server/instance
+      ```
+      </details>
+  
+2. <b>Ports and Protocols</b>
+      <details><summary>Show</summary>
+
+      ```
+      ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address> sudo swapoff -a # you have to execute the same command on each server/instance
+      ```
+      </details> 
+
+2. <b>Join Worker Nodes</b>
+      <details><summary>Show</summary>
+
+      ```
+      XXXXX
+      ```
+      </details>
