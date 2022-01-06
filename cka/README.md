@@ -88,7 +88,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       You have to go to the official documentation and follow the instructions: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl (you have to install kubeadm, kubelet and kubectl on each node)
       </details>        
 
-2. <b>Initializing</b>
+6. <b>Initializing</b>
       <details><summary>Show</summary>
 
       ```
@@ -97,6 +97,20 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```  
       ls /etc/kubernetes
       systemctl status kubelet  
+      ```
+      </details>
+
+7. <b>Kube Config</b>
+      <details><summary>Show</summary>
+
+      ```
+      mkdir -p ~/.kube  
+      sudo cp -i /etc/kubernetes/admin.conf ~/.kube/config
+      sudo chown $(id -u):$(id -g) ~/.kube/config
+      ```
+      ```  
+      alias k=kubectl
+      k get node
       ```
       </details>
         
