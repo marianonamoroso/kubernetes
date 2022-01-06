@@ -52,6 +52,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
         - Custom TCP - (2379 - 2380) - YOUR_VPC_CIDR_IPv4
         - Custom TCP - 6443 - 0.0.0.0/0	
         - Custom TCP - (10250 - 10252) - YOUR_VPC_CIDR_IPv4
+        - Custom TCP - 6783 - YOUR_VPC_CIDR_IPv4
         
       - <b>Worker Node - Security Group - Inbound</b>   
         - Custom TCP - 10250 - YOUR_VPC_CIDR_IPv4
