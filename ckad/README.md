@@ -907,29 +907,10 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```      
 
        </details>           
-
-46. <b>Configure an ingress controller and test it.</b> 
-       <details><summary>Show</summary>
-       
-       ```
-       XXXX
-       ```
-       ```
-       XXXX      
-       ```      
-       ```      
-       XXXX   
-       ```
-       ```      
-       XXXX     
-       ```      
-
-       </details>         
-      
-      
+     
 <h2>Challenging</h2>  
 
-47. <b>Create an nginx pod called nginx-resolver using image nginx, expose it internally with a service called nginx-resolver-service. Test that you are able to look up the service and pod names from within the cluster. Use the image: busybox:1.28 for dns lookup.</b> 
+46. <b>Create an nginx pod called nginx-resolver using image nginx, expose it internally with a service called nginx-resolver-service. Test that you are able to look up the service and pod names from within the cluster. Use the image: busybox:1.28 for dns lookup.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -941,7 +922,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
        </details>
 
-48. <b>List the InternalIP of all nodes of the cluster.</b> 
+47. <b>List the InternalIP of all nodes of the cluster.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -953,7 +934,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
        </details>      
 
-49. <b>Taint one worker node to be Unschedulable. Once done, create a pod called dev-redis with image redis:alpine to ensure workloads are not scheduled to the tainted node. Finally, create a new pod called prod-redis with image redis:alpine with toleration to be scheduled on the tainted node.</b> 
+48. <b>Taint one worker node to be Unschedulable. Once done, create a pod called dev-redis with image redis:alpine to ensure workloads are not scheduled to the tainted node. Finally, create a new pod called prod-redis with image redis:alpine with toleration to be scheduled on the tainted node.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -994,7 +975,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
        </details>         
 
-50. <b>Create a Pod called redis-storage with image redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod. Use volumeMount with mountPath = /data/redis.</b> 
+49. <b>Create a Pod called redis-storage with image redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod. Use volumeMount with mountPath = /data/redis.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1028,7 +1009,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
              
        </details>        
  
-51. <b>Create a new deployment called nginx-deploy, with image nginx:1.16 and 1 replica. Record the version. Next upgrade the deployment to version 1.17 using rolling update. Make sure that the version upgrade is recorded in the resource annotation.</b> 
+50. <b>Create a new deployment called nginx-deploy, with image nginx:1.16 and 1 replica. Record the version. Next upgrade the deployment to version 1.17 using rolling update. Make sure that the version upgrade is recorded in the resource annotation.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1043,7 +1024,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       
        </details>
 
-52. <b>Create a Pod with two containers, both with image busybox and command "echo hello; sleep 3600". Connect to the second container and run 'ls'.</b> 
+51. <b>Create a Pod with two containers, both with image busybox and command "echo hello; sleep 3600". Connect to the second container and run 'ls'.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1082,7 +1063,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```      
        </details>
 
-53. <b>Create pod with nginx container exposed at port 80. Add a busybox init container which downloads a page using "wget -O /work-dir/index.html http://protectyourflag.com". Make a volume of type emptyDir and mount it in both containers. For the nginx container, mount it on "/usr/share/nginx/html" and for the initcontainer, mount it on "/work-dir". When done, get the IP of the created pod and create a busybox pod and run "wget -O- IP".</b> 
+52. <b>Create pod with nginx container exposed at port 80. Add a busybox init container which downloads a page using "wget -O /work-dir/index.html http://protectyourflag.com". Make a volume of type emptyDir and mount it in both containers. For the nginx container, mount it on "/usr/share/nginx/html" and for the initcontainer, mount it on "/work-dir". When done, get the IP of the created pod and create a busybox pod and run "wget -O- IP".</b> 
        <details><summary>Show</summary>
        
        ```
