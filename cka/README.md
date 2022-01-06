@@ -165,7 +165,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
         ```
         </details>           
         
-<h3>Roles</h3>
+<h3>Accounts & Roles</h3>
 
 <h3>Service Account</h3>        
 
