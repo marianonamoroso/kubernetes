@@ -123,7 +123,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       
       </details>
         
-2. <b>Join Worker Nodes</b>
+9. <b>Join Worker Nodes</b>
       <details><summary>Show</summary>
 
       ```
@@ -141,73 +141,57 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 <h3>Certificates</h3>
         
-1. <b>Create Client Key</b>.
-       <details><summary>Show</summary>
+10. <b>Create Client Key</b>
+      <details><summary>Show</summary>
 
-        ```
-        openssl genrsa -out devops-mamoroso.key 2048
-        ls devops-mamoroso.key
-        cat devops-mamoroso.key 
-        ```
-        ```
-        openssl req -new -key devops-mamoroso.key -subj "/CN=mamoroso" -out devops-mamoroso.csr
-        ls devops-mamoroso.csr
-        cat devops-mamoroso.csr
-        ``` 
-        </details>
+      ```
+      openssl genrsa -out devops-mamoroso.key 2048
+      ls devops-mamoroso.key
+      cat devops-mamoroso.key 
+      ```
+
+
+
+      ```
+      openssl req -new -key devops-mamoroso.key -subj '/CN=mamoroso' -out devops-mamoroso.csr
+      ls devops-mamoroso.csr
+      cat devops-mamoroso.csr
+      ``` 
+      </details>
 
 2. <b>Create CertificateSigningRequest (CSR)</b>.
-       <details><summary>Show</summary>
-         
-        FYI: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#create-certificatesigningrequest 
-        ```
-        cat devops-mamoroso.csr |base64 | tr -d "\n" # you have to copy the output
-        vi devops-mamoroso-csr.yaml 
-        ```
-        ```
-        apiVersion: certificates.k8s.io/v1
-        kind: CertificateSigningRequest
-        metadata:
-          name: devops-mamoroso
-        spec:
-            request: <YOUR_CSR>
-          signerName: kubernetes.io/kube-apiserver-client
-          expirationSeconds: 86400  # one day
-          usages:
-          - client auth 
-        ```
-        ```
-        k create -f devops-mamoroso-csr.yaml
-        k get csr # devops-mamoroso is in peding state 
-        ``` 
-        </details> 
+     <details><summary>Show</summary>
+
+      You can check the official documentation in the following link: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#create-certificatesigningrequest 
+
+      ```
+      cat devops-mamoroso.csr |base64 | tr -d "\n" # you have to copy the output
+      vi devops-mamoroso-csr.yaml 
+      ```
+      ```
+      apiVersion: certificates.k8s.io/v1
+      kind: CertificateSigningRequest
+      metadata:
+        name: devops-mamoroso
+      spec:
+          request: <YOUR_CSR>
+        signerName: kubernetes.io/kube-apiserver-client
+        expirationSeconds: 86400  # one day
+        usages:
+        - client auth 
+      ```
+      ```
+      k create -f devops-mamoroso-csr.yaml
+      k get csr # devops-mamoroso is in peding state 
+      ``` 
+      </details> 
 
 3. <b>Approve CertificateSigningRequest (CSR)</b>.
-       <details><summary>Show</summary>
+     <details><summary>Show</summary>
 
-        ```
-        k certificate approve devops-mamoroso
-        k get csr devops-mamoroso -o yaml # copy the certificate section
-        echo <YOUR_CERTIFICATE> | base64 -d > devops-mamoroso.crt 
-        ```
-        </details>           
-        
-<h3>Roles</h3>
-
-<h3>Service Account</h3>        
-
-1. <b>Create Service Account</b>.
-       <details><summary>Show</summary>
-
-        ```
-        XXXX
-        ```
-        </details>
-
-2. <b>Permissions</b>.
-       <details><summary>Show</summary>
-
-        ```
-        XXXX
-        ```
-        </details>         
+      ```
+      k certificate approve devops-mamoroso
+      k get csr devops-mamoroso -o yaml # copy the certificate section
+      echo <YOUR_CERTIFICATE> | base64 -d > devops-mamoroso.crt 
+      ```
+      </details>           
