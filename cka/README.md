@@ -168,3 +168,19 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 <h3>Roles</h3>
 
 <h3>Service Account</h3>        
+
+1. <b>Create Service Account</b>.
+       <details><summary>Show</summary>
+
+        ```
+        XXXX
+        ```
+        </details>
+
+2. <b>Permissions</b>.
+       <details><summary>Show</summary>
+
+        ```
+        XXXX
+        ```
+        </details>         
