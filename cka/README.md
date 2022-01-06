@@ -114,10 +114,23 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```
       </details>
         
+8. <b>Installing Wave Net</b>
+      <details><summary>Show</summary>
+        
+      To configure network plugin, you have to go to the official documentation and follow the instructions: https://www.weave.works/docs/net/latest/kubernetes/kube-addon/ 
+      
+      </details>
+        
 2. <b>Join Worker Nodes</b>
       <details><summary>Show</summary>
 
       ```
-      XXXXX
+      kubeadm token create --print-join-command # you have to execute it on the master node
       ```
+      ```  
+      sudo kubeadm join <YOUR_IPv4> --token <YOUR_TOKEN> --discovery-token-ca-cert-hash <YOUR_SHA> # you have to execute it on the worker nodes
+      ```
+      ```   
+      k get node # you have to execute it on the master node and you should see the new worker nodes 
+      ```  
       </details>
