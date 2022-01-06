@@ -141,7 +141,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 <h3>Certificates</h3>
         
-10. <b>Create Client Key</b>
+1. <b>Create Client Key</b>
       <details><summary>Show</summary>
 
       ```
@@ -159,7 +159,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ``` 
       </details>
 
-2. <b>Create CertificateSigningRequest (CSR)</b>.
+2. <b>Create CertificateSigningRequest (CSR)</b>
      <details><summary>Show</summary>
 
       You can check the official documentation in the following link: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#create-certificatesigningrequest 
@@ -186,7 +186,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ``` 
       </details> 
 
-3. <b>Approve CertificateSigningRequest (CSR)</b>.
+3. <b>Approve CertificateSigningRequest (CSR)</b>
      <details><summary>Show</summary>
 
       ```
