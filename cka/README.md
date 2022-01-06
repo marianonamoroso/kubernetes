@@ -49,14 +49,35 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
       - <b>Control Plane - Security Group - Inbound</b>  
         - SSH	TCP -	22 - YOUR_PUBLIC_IPv4	  
-        - Custom TCP - (2379 - 2380) - VPC_CIDR_IPv4
+        - Custom TCP - (2379 - 2380) - YOUR_VPC_CIDR_IPv4
         - Custom TCP - 6443 - 0.0.0.0/0	
-        - Custom TCP - (10250 - 10252) - VPC_CIDR_IPv4
+        - Custom TCP - (10250 - 10252) - YOUR_VPC_CIDR_IPv4
         
       - <b>Worker Node - Security Group - Inbound</b>   
-        - Custom TCP - 10250 - VPC_CIDR_IPv4
+        - Custom TCP - 10250 - YOUR_VPC_CIDR_IPv4
         - Custom TCP - (30000 - 32767) -	0.0.0.0/0
       </details> 
+
+3. <b>Hostnames</b>
+      <details><summary>Show</summary>
+
+      ```
+      sudo vi /etc/hosts # you have to add the hosts on each instance
+      ```
+      ```  
+      YOUR_MASTER_IPv4 master
+      YOUR_WORKER-1_IPv4 worker1
+      YOUR_WORKER-2_IPv4 worker2
+      ```
+      ```  
+      ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<master_public_ipv4_address> sudo hostnamectl set-hostname master # you have to change the name of the master node instance - login/logout
+      ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<worker-1_public_ipv4_address> sudo hostnamectl set-hostname worker1 # you have to change the name of the worker node instance - login/logout
+      ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<worker-2_public_ipv4_address> sudo hostnamectl set-hostname worker2 # you have to change the name of the worker node instance - login/logout 
+      ```  
+      </details>  
+  
+  
+
 
 2. <b>Join Worker Nodes</b>
       <details><summary>Show</summary>
