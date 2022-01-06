@@ -47,9 +47,15 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 2. <b>Ports and Protocols</b>
       <details><summary>Show</summary>
 
-      ```
-      ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address> sudo swapoff -a # you have to execute the same command on each server/instance
-      ```
+      - <b>Control Plane - Security Group - Inbound</b>  
+        - SSH	TCP -	22 - YOUR_PUBLIC_IPv4	  
+        - Custom TCP - (2379 - 2380) - VPC_CIDR_IPv4
+        - Custom TCP - 6443 - 0.0.0.0/0	
+        - Custom TCP - (10250 - 10252) - VPC_CIDR_IPv4
+        
+      - <b>Worker Node - Security Group - Inbound</b>   
+        - Custom TCP - 10250 - VPC_CIDR_IPv4
+        - Custom TCP - (30000 - 32767) -	0.0.0.0/0
       </details> 
 
 2. <b>Join Worker Nodes</b>
