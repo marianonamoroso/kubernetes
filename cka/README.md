@@ -80,6 +80,13 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       You have to go to the official documentation and follow the instructions: https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd (you have to install containerd on each node)
+      </details> 
+        
+5. <b>Installing kubeadm, kubelet and kubectl</b>
+      <details><summary>Show</summary>
+
+      You have to go to the official documentation and follow the instructions: https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd (you have to install kubeadm, kubelet and kubectl on each node)
+      </details>        
 
 2. <b>Join Worker Nodes</b>
       <details><summary>Show</summary>
