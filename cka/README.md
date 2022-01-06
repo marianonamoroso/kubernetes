@@ -136,3 +136,35 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       k get node # you have to execute it on the master node and you should see the new worker nodes 
       ```  
       </details>
+
+<h2>Security</h2>
+
+<h3>Certificates</h3>
+        
+1. <b>Create Client Key</b>.
+       <details><summary>Show</summary>
+
+        ```
+        k create ns pyf
+        ```
+        </details>
+
+2. <b>Create CertificateSigningRequest (CSR)</b>.
+       <details><summary>Show</summary>
+
+        ```
+        k create ns pyf
+        ```
+        </details> 
+
+3. <b>Approve CertificateSigningRequest (CSR)</b>.
+       <details><summary>Show</summary>
+
+        ```
+        k create ns pyf
+        ```
+        </details>           
+        
+<h3>Roles</h3>
+
+<h3>Service Account</h3>        
