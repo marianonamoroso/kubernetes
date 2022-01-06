@@ -119,7 +119,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 8. <b>Installing Wave Net</b>
       <details><summary>Show</summary>
         
-      To configure network plugin, you have to go to the official documentation and follow the instructions: https://www.weave.works/docs/net/latest/kubernetes/kube-addon/ 
+      To configure the network plugin, you have to go to the official documentation and follow the instructions: https://www.weave.works/docs/net/latest/kubernetes/kube-addon/ 
       
       </details>
         
