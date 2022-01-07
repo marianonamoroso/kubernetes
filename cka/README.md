@@ -139,7 +139,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 <h2>Security</h2>
 
-<h3>Certificates</h3>
+<h3>Certificates & Accounts</h3>
         
 1. <b>Create Client Key</b>
       <details><summary>Show</summary>
