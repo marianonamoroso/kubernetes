@@ -195,4 +195,37 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       k get csr devops-mamoroso -o yaml # copy the certificate section
       echo <YOUR_CERTIFICATE> | base64 -d > devops-mamoroso.crt 
       ```
+
       </details>           
+       
+4. <b>Generate ConfigFile (CF)</b>
+     <details><summary>Show</summary>
+
+      ```
+      cp config devops-mamoroso.conf # you will extract info of kubeconfig file
+      vi devops-mamoroso.conf
+      ```
+      ```
+      apiVersion: v1
+      clusters:
+      - cluster:
+          certificate-authority-data: <YOUR_CERTIFICATE_AUTHORITY_DATA>
+          server: <YOUR_SERVER_IP> # this information you can get it executing cluster-info
+        name: kubernetes
+      contexts:
+      - context:
+          cluster: kubernetes
+          user: devops-mamoroso # change username
+        name: kubernetes-admin@kubernetes
+      current-context: kubernetes-admin@kubernetes
+      kind: Config
+      preferences: {}
+      users:
+      - name: devops-mamoroso # change username
+        user:
+          client-certificate: /home/ubuntu/devops-mamoroso.crt # you have to put your crt file (also you can paste your base64 crt info but you have to use client-certificate-data instead of client-certificate)
+          client-key: /home/ubuntu/devops-mamoroso.key  # you have to put your key file (also you can paste your base64 crt info but you have to use client-certificate-data instead of client-certificate)
+      ``` 
+
+      </details>   
+
