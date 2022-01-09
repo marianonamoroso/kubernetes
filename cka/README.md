@@ -225,6 +225,9 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
         user:
           client-certificate: /home/ubuntu/devops-mamoroso.crt # you have to put your crt file (also you can paste your base64 crt info but you have to use client-certificate-data instead of client-certificate)
           client-key: /home/ubuntu/devops-mamoroso.key  # you have to put your key file (also you can paste your base64 crt info but you have to use client-certificate-data instead of client-certificate)
+      ```
+      ``` 
+      k --kubeconfig devops-mamoroso.conf get pod # you should see "Unauthorized" error on your console
       ``` 
 
       </details>   
