@@ -231,7 +231,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 <h3>Roles</h3>
         
-1. <b>Cluster Role</b>
+1. <b>Create Cluster Role</b>
       <details><summary>Show</summary>
 
       ```
@@ -242,7 +242,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRole
       metadata:
-        name: dev-cr
+        name: devops-cr
       rules:
       - apiGroups:
         - ""
@@ -264,5 +264,38 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ``` 
       ```
       k create -f devops-cr.yaml
+      k get clusterrole devops-cr
+      
       ```  
       </details>
+
+2. <b>Create Cluster Role</b>
+      <details><summary>Show</summary>
+
+      ```
+      k create clusterrolebinding devops-crb --clusterrole=devops-cr --user=mamoroso --dry-run=client -o yaml > devops-crb.yaml
+      vi devops-crb.yaml
+      ```
+      ```
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: devops-crb
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: devops-cr
+      subjects:
+      - apiGroup: rbac.authorization.k8s.io
+        kind: User
+        name: devops-mamoroso
+      ``` 
+      ```
+      k create -f devops-crb.yaml
+      k get clusterrolebinding.rbac.authorization.k8s.io/devops-crb
+      k describe clusterrolebinding.rbac.authorization.k8s.io/devops-crb  
+      ```  
+        
+      ```  
+      </details>
+       
