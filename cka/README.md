@@ -149,9 +149,6 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ls devops-mamoroso.key
       cat devops-mamoroso.key 
       ```
-
-
-
       ```
       openssl req -new -key devops-mamoroso.key -subj '/CN=mamoroso' -out devops-mamoroso.csr
       ls devops-mamoroso.csr
@@ -232,3 +229,40 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
       </details>   
 
+<h3>Roles</h3>
+        
+1. <b>Cluster Role</b>
+      <details><summary>Show</summary>
+
+      ```
+      k create clusterrole dev-cr --verb=get,list,create,update,delete --resource=deployments.apps,pods --dry-run=client -o yaml > devops-cr.yaml
+      vi devops-cr.yaml
+      ```
+      ```
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRole
+      metadata:
+        name: dev-cr
+      rules:
+      - apiGroups:
+        - ""
+        resources:
+        - pods
+        - services
+        verbs: ["*"]
+      - apiGroups:
+        - apps
+        resources:
+        - deployments
+        - statefulSets
+        verbs:
+        - get
+        - list
+        - create
+        - update
+        - delete
+      ``` 
+      ```
+      k create -f devops-cr.yaml
+      ```  
+      </details>
