@@ -295,7 +295,5 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       k get clusterrolebinding.rbac.authorization.k8s.io/devops-crb
       k describe clusterrolebinding.rbac.authorization.k8s.io/devops-crb  
       ```  
-        
-      ```  
       </details>
        
