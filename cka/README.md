@@ -231,7 +231,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 <h3>Roles</h3>
         
-1. <b>Create Cluster Role</b>
+1. <b>Cluster Role</b>
       <details><summary>Show</summary>
 
       ```
@@ -269,7 +269,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```  
       </details>
 
-2. <b>Create Cluster Role</b>
+2. <b>Role Binding</b>
       <details><summary>Show</summary>
 
       ```
