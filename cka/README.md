@@ -198,6 +198,8 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 <h3>Upgrading Kubernetes Cluster</h3>
 
+<h4>Master Node</h3>
+        
 1. <b>Upgrade kubeadm</b>        
       <details><summary>Show</summary>
 
@@ -214,7 +216,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```
       </details> 
         
-3. <b>Drain Nodes</b>        
+3. <b>Drain Master</b>        
       <details><summary>Show</summary>
 
       ```
@@ -238,6 +240,49 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       XXXX
       ```
       </details> 
+ 
+<h4>Worker Node</h3>
+ 
+1. <b>Upgrade kubeadm</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details>  
+        
+2. <b>Upgrade Components</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details> 
+        
+3. <b>Drain Worker</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details> 
+        
+        
+4. <b>Upgrade kubelet/b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details>
+        
+5. <b>Uncordon Worker</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details> 
         
 <h3>Contexts</h3>
         
@@ -248,7 +293,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       XXXX
       ```
       </details>        
-
+        
 <h3>Env Variables & Alias</h3>
 
 - <b>Useful Stuff</b>        
