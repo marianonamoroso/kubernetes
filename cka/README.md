@@ -198,13 +198,46 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 <h3>Upgrading Kubernetes Cluster</h3>
 
-1. <b>XXX</b>        
+1. <b>Upgrade kubeadm</b>        
       <details><summary>Show</summary>
 
       ```
       XXXX
       ```
       </details>  
+        
+2. <b>Upgrade Components</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details> 
+        
+3. <b>Drain Nodes</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details> 
+        
+        
+4. <b>Upgrade kubelet and kubectl</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details>
+        
+5. <b>Uncordon Master</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details> 
         
 <h3>Contexts</h3>
         
