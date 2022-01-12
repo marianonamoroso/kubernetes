@@ -137,6 +137,29 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```  
       </details>
 
+<h3>Backup & Restore</h3>
+
+1. <b>Create SA</b>
+     <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+
+      </details>            
+
+<h3>Env Variables & Alias</h3>
+
+1. <b>Useful Stuff</b>        
+      <details><summary>Show</summary>
+
+      ```
+      alias k='kubectl'
+      export do='—dry-run=client -o yaml'
+      kubectl config set-context <your_context> --namespace=pyf # avoiding type the namespace on each commands
+      ```
+      </details>
+       
 <h2>Security</h2>
 
 <h3>Certificates & Accounts</h3>
@@ -352,4 +375,5 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       k auth can-i get pods --as system:serviceaccount:default:gitlab -n default # yes
       ``` 
       </details>
-   
+       
+       
