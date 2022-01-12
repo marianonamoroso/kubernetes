@@ -194,7 +194,17 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ``` 
       k get pod -n kube-system # you have to wait few minutes
       ```
-      </details>           
+      </details>
+
+<h3>Upgrading Kubernetes Cluster</h3>
+
+1. <b>XXX</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details>        
 
 <h3>Env Variables & Alias</h3>
 
@@ -207,7 +217,9 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       kubectl config set-context <your_context> --namespace=pyf # avoiding type the namespace on each commands
       ```
       </details>
-       
+
+
+        
 <h2>Security</h2>
 
 <h3>Certificates & Accounts</h3>
