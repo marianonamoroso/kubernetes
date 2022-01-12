@@ -242,30 +242,34 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      k create clusterrole dev-cr --verb=get,list,create,update,delete --resource=deployments.apps,pods --dry-run=client -o yaml > devops-cr.yaml
+      kubectl create clusterrole developer-cr --verb=create,get,list,update,delete --resource=pods,deployments.apps --dry-run=client -o yaml > devops-cr.yaml  
       vi devops-cr.yaml
       ```
       ```
       apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRole
       metadata:
-        name: devops-cr
+        creationTimestamp: null
+        name: developer-cr
       rules:
       - apiGroups:
         - ""
         resources:
         - pods
-        - services
-        verbs: ["*"]
+        verbs:
+        - create
+        - get
+        - list
+        - update
+        - delete
       - apiGroups:
         - apps
         resources:
         - deployments
-        - statefulSets
         verbs:
+        - create
         - get
         - list
-        - create
         - update
         - delete
       ``` 
@@ -280,27 +284,10 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      k create clusterrolebinding devops-crb --clusterrole=devops-cr --user=mamoroso --dry-run=client -o yaml > devops-crb.yaml
-      vi devops-crb.yaml
-      ```
-      ```
-      apiVersion: rbac.authorization.k8s.io/v1
-      kind: ClusterRoleBinding
-      metadata:
-        name: devops-crb
-      roleRef:
-        apiGroup: rbac.authorization.k8s.io
-        kind: ClusterRole
-        name: devops-cr
-      subjects:
-      - apiGroup: rbac.authorization.k8s.io
-        kind: User
-        name: devops-mamoroso
-      ``` 
-      ```
-      k create -f devops-crb.yaml
+      k create clusterrolebinding devops-crb --clusterrole=devops-cr --user=mamoroso
       k get clusterrolebinding.rbac.authorization.k8s.io/devops-crb
-      k describe clusterrolebinding.rbac.authorization.k8s.io/devops-crb  
+      k describe clusterrolebinding.rbac.authorization.k8s.io/devops-crb
+      k --kubeconfig devops-mamoroso.conf get pod
       ```  
       </details>
        
