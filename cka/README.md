@@ -224,9 +224,16 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
           client-key: /home/ubuntu/devops-mamoroso.key  # you have to put your key file (also you can paste your base64 crt info but you have to use client-certificate-data instead of client-certificate)
       ```
       ``` 
-      k --kubeconfig devops-mamoroso.conf get pod # you should see "Unauthorized" error on your console
-      ``` 
-
+      k --kubeconfig devops-mamoroso.conf get pod
+      ```
+      <b>Errors</b>
+      - Error from server (Forbidden): pods is forbidden: User "devops-mamoroso" cannot list resource "pods" in API group "" in the namespace "default"
+        - The output is correct, we do not have a clusterrole and clusterrolebinding created so you have to keep moving forward to the next step (roles).
+      - Error in configuration: context was not found for specified context: <output>
+        - You have to check your kubeconfig file (contexts, name, users, and so on).  
+      - Error You must be logged in to the server (Unauthorized)
+        - You do not have the user created or (please, check if your user was created, if not, you have to check the csr).
+       
       </details>   
 
 <h3>Roles</h3>
