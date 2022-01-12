@@ -213,8 +213,8 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       - context:
           cluster: kubernetes
           user: devops-mamoroso # change username
-        name: kubernetes-admin@kubernetes
-      current-context: kubernetes-admin@kubernetes
+        name: devops-mamoroso@kubernetes # change username
+      current-context: devops-mamoroso@kubernetes # change username
       kind: Config
       preferences: {}
       users:
