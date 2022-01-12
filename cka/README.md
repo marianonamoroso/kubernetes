@@ -187,7 +187,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```
       ```
       - hostPath:
-          path: /var/lib/etcd # new path
+          path: /var/lib/etcd-snapshotdb # new path
           type: DirectoryOrCreate
           name: etcd-data
       ```
