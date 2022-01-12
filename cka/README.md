@@ -227,12 +227,12 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       k --kubeconfig devops-mamoroso.conf get pod
       ```
       <b>Errors</b>
-      - Error from server (Forbidden): pods is forbidden: User "devops-mamoroso" cannot list resource "pods" in API group "" in the namespace "default"
-        - The output is correct, we do not have a clusterrole and clusterrolebinding created so you have to keep moving forward to the next step (roles).
-      - Error in configuration: context was not found for specified context: <output>
+      - <i>Error from server (Forbidden): pods is forbidden: User "devops-mamoroso" cannot list resource "pods" in API group "" in the namespace "default"</i>
+        - The output is correct, we did not have a clusterrole and clusterrolebinding so you have to keep moving forward to the next step (roles).
+      - <i>Error in configuration: context was not found for specified context: <output></i>
         - You have to check your kubeconfig file (contexts, name, users, and so on).  
-      - Error You must be logged in to the server (Unauthorized)
-        - You do not have the user created or (please, check if your user was created, if not, you have to check the csr).
+      - <i>Error You must be logged in to the server (Unauthorized)</i>
+        - You did not create the user (please, check if your user was created, if not, you have to check the csr).
        
       </details>   
 
