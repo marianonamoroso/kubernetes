@@ -323,7 +323,9 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      k config set-context --curent --namespace=<YOUR_NS>
+      k config get-contexts # list your contexts configured on your kubeconfig file  
+      k config current-context # list your current context  
       ```
       </details>        
         
