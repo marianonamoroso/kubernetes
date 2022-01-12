@@ -158,8 +158,11 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       --cacert "/etc/kubernetes/pki/etcd/ca.crt" \ # trusted-ca-file
       --cert="/etc/kubernetes/pki/etcd/server.crt" \ # cert-file
       --key="/etc/kubernetes/pki/etcd/server.key" # key-file
-       
+      ``` 
       ```
+      ETCDCTL_API=3 etcdctl snapshot status etcd-snapshotdb
+      ETCDCTL_API=3 etcdctl --write-out=table snapshot status etcd-snapshotdb
+      ``` 
 
       </details>
 
