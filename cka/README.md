@@ -204,6 +204,16 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```
       XXXX
       ```
+      </details>  
+        
+<h3>Contexts</h3>
+        
+1. <b>Configuration</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
       </details>        
 
 <h3>Env Variables & Alias</h3>
@@ -437,3 +447,24 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       </details>
        
        
+<h2>Observability</h2>
+           
+<h3>JSONPath</h3>
+       
+1. <b>XXXX</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details>       
+
+<h2>Troubleshooting</h2>
+       
+- <b>XXXX</b>        
+      <details><summary>Show</summary>
+
+      ```
+      XXXX
+      ```
+      </details>          
