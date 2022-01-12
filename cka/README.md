@@ -139,14 +139,38 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 <h3>Backup & Restore</h3>
 
-1. <b>Create SA</b>
+2. <b>Installing etcdctl</b>
+     <details><summary>Show</summary>
+
+      ```
+      sudo apt  install etcd-client # on your master node 
+      etcdctl --help
+      ```
+
+      </details>
+        
+2. <b>Backing up ETCD</b>
+     <details><summary>Show</summary>
+
+      ```
+      sudo cat /etc/kubernetes/manifests/etcd.yaml | grep -i /etc/kubernetes/pki
+      sudo ETCDCTL_API=3 etcdctl snapshot save etcd-snapshot.db \ # backup file "etcd-snapshot.db
+      --cacert "/etc/kubernetes/pki/etcd/ca.crt" \ # trusted-ca-file
+      --cert="/etc/kubernetes/pki/etcd/server.crt" \ # cert-file
+      --key="/etc/kubernetes/pki/etcd/server.key" # key-file
+       
+      ```
+
+      </details>
+
+3. <b>Restoring ETCD</b>
      <details><summary>Show</summary>
 
       ```
       XXXX
       ```
 
-      </details>            
+      </details>           
 
 <h3>Env Variables & Alias</h3>
 
