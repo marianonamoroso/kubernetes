@@ -299,8 +299,8 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```
       k create serviceaccount gitlab
       k describe serviceaccount gitlab # you can check the token generated
-      k get secrets <YOUR_TOKEN>
-      k describe secrets <YOUR_TOKEN> 
+      k get secrets <YOUR_SA>
+      k describe secrets <YOUR_SA_TOKEN> 
       ```
 
       </details>         
@@ -331,7 +331,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       users:
       - name: gitlab
         user:
-          token: <YOUR_TOKEN> # k describe serviceaccount gitlab 
+          token: <YOUR_SA_TOKEN> # you have to copy the out of the following commando: k describe secrets <YOUR_SA> 
       ```
       ```
       k --kubeconfig serviceaccount-gitlab.conf get pod # Remember the errors outlined on the step 4 of the "Certificates0 & Accounts" section (Generate ConfigFile CF)
