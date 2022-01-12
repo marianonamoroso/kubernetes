@@ -168,11 +168,29 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 3. <b>Restoring ETCD</b>
      <details><summary>Show</summary>
-
+      
       ```
-      XXXX
+      sudo cat /etc/kubernetes/manifests/etcd.yaml # you can check the hostPath directory for ETCD 
+      ``` 
       ```
-
+      - hostPath:
+      path: /var/lib/etcd # here
+      type: DirectoryOrCreate
+      name: etcd-data
+      ```
+      ```
+      sudo ETCDCTL_API=3 etcdctl snapshot restore etcd-snapshotdb --data-dir /var/lib/etcd-backup # we create a new directory for the backup
+      sudo ls /var/lib/etcd-backup/ 
+      ``` 
+      ```
+      sudo vi /etc/kubernetes/manifests/etcd.yaml
+      ```
+      ```
+      - hostPath:
+      path: /var/lib/etcd # new path
+      type: DirectoryOrCreate
+      name: etcd-data
+      ``` 
       </details>           
 
 <h3>Env Variables & Alias</h3>
