@@ -190,7 +190,10 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
           path: /var/lib/etcd # new path
           type: DirectoryOrCreate
           name: etcd-data
+      ```
       ``` 
+      k get pod -n kube-system # you have to wait few minutes
+      ```
       </details>           
 
 <h3>Env Variables & Alias</h3>
