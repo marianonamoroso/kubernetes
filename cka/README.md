@@ -290,4 +290,20 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       k --kubeconfig devops-mamoroso.conf get pod
       ```  
       </details>
+
+<h3>Service Account</h3>
+       
+1. <b>Create SA</b>
+     <details><summary>Show</summary>
+
+      ```
+      k create serviceaccount gitlab
+      k describe serviceaccount gitlab # you can check the token generated
+      k get secrets <YOUR_TOKEN>
+      k describe secrets <YOUR_TOKEN> 
+      ```
+
+      </details>         
+       
+       
        
