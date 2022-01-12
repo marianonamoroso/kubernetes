@@ -204,7 +204,14 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      sudo -i
+      apt update
+      apt-cache madison kubeadm # checking all available versions
+      kubeadm version  
+      ```
+      ```
+      apt-mark unhold kubeadm && apt-get update && apt-get install -y kubeadm=1.23.1-00 && apt-mark hold kubeadm
+      kubeadm version
       ```
       </details>  
         
@@ -212,15 +219,19 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      kubeadm upgrade plan
       ```
+      ```
+      sudo kubeadm upgrade apply v1.23.1  
+      ```  
       </details> 
         
 3. <b>Drain Master</b>        
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      k drain master --ignore-daemonsets # you have to execute it with the ubuntu user
+      k get node # you should see the following status on the master node: SchedulingDisabled  
       ```
       </details> 
         
@@ -229,7 +240,11 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      sudo -i
+      apt-mark unhold kubelet kubectl && apt-get update && apt-get install -y kubelet=1.23.1-00 kubectl=1.23.1-00 && apt-mark hold kubelet kubectl
+      systemctl daemon-reload
+      systemctl restart kubelet
+      systemctl status kubelet
       ```
       </details>
         
@@ -237,7 +252,8 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      k uncordon master # you have to execute it with the ubuntu user
+      k get node
       ```
       </details> 
  
@@ -247,7 +263,14 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      sudo -i
+      apt update
+      apt-cache madison kubeadm # checking all available versions
+      kubeadm version  
+      ```
+      ```
+      apt-mark unhold kubeadm && apt-get update && apt-get install -y kubeadm=1.23.1-00 && apt-mark hold kubeadm
+      kubeadm version
       ```
       </details>  
         
@@ -255,15 +278,17 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      sudo kubeadm upgrade node
       ```
+
       </details> 
         
 3. <b>Drain Worker</b>        
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      k drain worker1 --ignore-daemonsets --force # you have to execute it with the ubuntu user on master node
+      k get node
       ```
       </details> 
         
@@ -272,7 +297,14 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      sudo -i
+      apt update
+      apt-cache madison kubeadm # checking all available versions
+      kubeadm version  
+      ```
+      ```
+      apt-mark unhold kubeadm && apt-get update && apt-get install -y kubeadm=1.23.1-00 && apt-mark hold kubeadm
+      kubeadm version
       ```
       </details>
         
@@ -280,7 +312,8 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
-      XXXX
+      k uncordon worker1
+      k get node  
       ```
       </details> 
         
