@@ -293,7 +293,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       </details> 
         
         
-4. <b>Upgrade kubelet/b>        
+4. <b>Upgrade kubelet</b>        
       <details><summary>Show</summary>
 
       ```
