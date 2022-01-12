@@ -224,7 +224,6 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     ```
     alias k='kubectl'
     export do='—dry-run=client -o yaml'
-    kubectl config set-context <your_context> --namespace=pyf # avoiding type the namespace on each commands
     ```
     </details>
         
