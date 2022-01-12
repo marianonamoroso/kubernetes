@@ -174,9 +174,9 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ``` 
       ```
       - hostPath:
-      path: /var/lib/etcd # here
-      type: DirectoryOrCreate
-      name: etcd-data
+          path: /var/lib/etcd # here
+          type: DirectoryOrCreate
+          name: etcd-data
       ```
       ```
       sudo ETCDCTL_API=3 etcdctl snapshot restore etcd-snapshotdb --data-dir /var/lib/etcd-backup # we create a new directory for the backup
@@ -187,9 +187,9 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```
       ```
       - hostPath:
-      path: /var/lib/etcd # new path
-      type: DirectoryOrCreate
-      name: etcd-data
+          path: /var/lib/etcd # new path
+          type: DirectoryOrCreate
+          name: etcd-data
       ``` 
       </details>           
 
