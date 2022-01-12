@@ -219,16 +219,14 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 <h3>Env Variables & Alias</h3>
 
 - <b>Useful Stuff</b>        
-      <details><summary>Show</summary>
+    <details><summary>Show</summary>
 
-      ```
-      alias k='kubectl'
-      export do='—dry-run=client -o yaml'
-      kubectl config set-context <your_context> --namespace=pyf # avoiding type the namespace on each commands
-      ```
-      </details>
-
-
+    ```
+    alias k='kubectl'
+    export do='—dry-run=client -o yaml'
+    kubectl config set-context <your_context> --namespace=pyf # avoiding type the namespace on each commands
+    ```
+    </details>
         
 <h2>Security</h2>
 
@@ -452,19 +450,19 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 <h3>JSONPath</h3>
        
 - <b>XXXX</b>        
-      <details><summary>Show</summary>
+    <details><summary>Show</summary>
 
-      ```
-      XXXX
-      ```
-      </details>       
+    ```
+    XXXX
+    ```
+    </details>       
 
 <h2>Troubleshooting</h2>
        
 - <b>XXXX</b>        
-      <details><summary>Show</summary>
+    <details><summary>Show</summary>
 
-      ```
-      XXXX
-      ```
-      </details>          
+    ```
+    XXXX
+    ```
+    </details>          
