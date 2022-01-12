@@ -199,7 +199,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
      <details><summary>Show</summary>
 
       ```
-      cp config devops-mamoroso.conf # you will extract info of kubeconfig file
+      cp ~/.kube/config devops-mamoroso.conf # you will extract info of kubeconfig file
       vi devops-mamoroso.conf
       ```
       ```
@@ -304,6 +304,52 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```
 
       </details>         
+
+2. <b>SA Config File</b>
+     <details><summary>Show</summary>
+
+      ``` 
+      cp ~/.kube/config serviceaccount-gitlab.conf # you will extract info of kubeconfig file
+      k describe secrets gitlab-token-hckg8   # you have to copy the token variable
+      vi serviceaccount-gitlab.conf
+      ```
+      ``` 
+      apiVersion: v1
+      clusters:
+      - cluster:
+          certificate-authority-data: <YOUR_CERTIFICATE_AUTHORITY_DATA>
+          server: <YOUR_SERVER_IP> # this information you can get it executing cluster-info
+        name: kubernetes
+      contexts:
+      - context:
+          cluster: kubernetes
+          user: gitlab
+        name: gitlab@kubernetes
+      current-context: gitlab@kubernetes
+      kind: Config
+      preferences: {}
+      users:
+      - name: gitlab
+        user:
+          token: <YOUR_TOKEN> # k describe serviceaccount gitlab 
+      ```
+      ```
+      k --kubeconfig serviceaccount-gitlab.conf get pod # Remember the errors outlined on the step 4 of the "Certificates0 & Accounts" section (Generate ConfigFile CF)
+      ``` 
+      </details>         
        
-       
-       
+3. <b>Roles SA</b>
+     <details><summary>Show</summary>
+
+      ```
+      k create clusterrole gitlab-cr --verb=get,create,delete --resource=pods
+      k describe clusterrole gitlab-cr              
+      k create clusterrolebinding gitlab-cb --serviceaccount=default:gitlab --clusterrole=gitlab-cr
+      k describe clusterrolebinding gitlab-cb    
+      ```
+      ```
+      k auth can-i get deployments --as system:serviceaccount:default:gitlab -n default # no
+      k auth can-i get pods --as system:serviceaccount:default:gitlab -n default # yes
+      ``` 
+      </details>
+   
