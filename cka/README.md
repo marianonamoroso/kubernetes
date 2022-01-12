@@ -218,7 +218,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 <h3>Env Variables & Alias</h3>
 
-1. <b>Useful Stuff</b>        
+- <b>Useful Stuff</b>        
       <details><summary>Show</summary>
 
       ```
@@ -451,7 +451,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
            
 <h3>JSONPath</h3>
        
-1. <b>XXXX</b>        
+- <b>XXXX</b>        
       <details><summary>Show</summary>
 
       ```
