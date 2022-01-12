@@ -190,7 +190,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       k certificate approve devops-mamoroso
       k get csr # now devops-mamoroso is appproved
       k get csr devops-mamoroso -o yaml # copy the certificate section
-      echo <YOUR_CERTIFICATE> | base64 -d > devops-mamoroso.crt 
+      echo <YOUR_CERTIFICATE> | base64 -d > devops-mamoroso.crt # you have to execute the following command in order to save your public key
       ```
 
       </details>           
