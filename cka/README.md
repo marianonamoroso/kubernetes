@@ -10,6 +10,10 @@ Finally, I'll share with you my environment used for practicing CKA's required t
 
 - Bootstrapping clusters with kubeadm: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/
 
+<b>Exercises:</b><br> 
+
+- https://github.com/alijahnas/CKA-practice-exercises
+
 <h2>AWS Infrastructure</h2>
 
 <h3>EC2 Instances</h3>
