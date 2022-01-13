@@ -626,5 +626,32 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     ```
     sudo systemctl deamon-reload  
     sudo systemctl restart kubelet
+    sudo systemctl status kubelet  
     ```  
     </details>          
+
+- <b>Certifcate Issues</b>        
+    <details><summary>Show</summary>
+
+    ```
+    k get node # you are not able to connect to the cluster
+    cat ~/.kube/config # you have to check cluster, server and certificates  
+    ```   
+    ```
+    echo "certificate-authority-data" | base64 -d # <YOUR_CERT_AUTH_DATA>
+    sudo cat /etc/kubernetes/pki/ca.crt # you have to check if it's the same  
+    ```
+      
+    </details>   
+          
+- <b>Context Issues</b>        
+    <details><summary>Show</summary>
+
+    ```
+    k config view # you have to check server IP and PORT (6443) 
+    ```   
+    ```
+    vi ~/.kube/config # you have to change the server IP or/and PORT if it's wrong
+    ```
+      
+    </details>   
