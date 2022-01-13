@@ -622,5 +622,9 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     ```
     ```  
     ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_KUBEADM_ARGS $KUBELET_EXTRA_ARGS # on our case we have to change the ExecStart variable
+    ```
+    ```
+    sudo systemctl deamon-reload  
+    sudo systemctl restart kubelet
     ```  
     </details>          
