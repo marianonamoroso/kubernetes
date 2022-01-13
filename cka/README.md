@@ -585,14 +585,26 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
            
 <h3>JSONPath</h3>
        
-- <b>XXXX</b>        
+- <b>Nodes</b>        
     <details><summary>Show</summary>
 
     ```
-    XXXX
+    k get nodes -o jsonpath='{.items[*].metadata.name}{"\n"}' # listing nodenames
+    k get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{"\n"}{end}' # listing nodenames with range  
+    k get nodes -o jsonpath='{.items[1].metadata.labels}{"\n"}' # listing node 1 labels
     ```
     </details>       
 
+- <b>Pods</b>        
+    <details><summary>Show</summary>
+
+    ```
+    k get pods -o jsonpath='{.items[*].metadata.name}{"\n"}' # listing podnames
+    k get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{"\n"}{end}' # listing podnames with range  
+    k get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels}{"\t"}{"\n"}{end}' # listing pods names and labels
+    k get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[].image}{"\t"}{"\n"}{end}' # listing pods names and images 
+    ```
+    </details>   
 <h2>Troubleshooting</h2>
        
 - <b>XXXX</b>        
