@@ -608,10 +608,19 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     </details>   
 <h2>Troubleshooting</h2>
        
-- <b>XXXX</b>        
+- <b>Kubelet Issues</b>        
     <details><summary>Show</summary>
 
     ```
-    XXXX
+    k get node # status: NotReady 
+    ssh <node>   
     ```
+    ```
+    service kubelet status # location issues
+    which kubelet
+    sudo vi /etc/systemd/system/kubelet.service.d/10-kubeadm.conf # you have this location on the service status ouput executed before
+    ```
+    ```  
+    ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_KUBEADM_ARGS $KUBELET_EXTRA_ARGS # on our case we have to change the ExecStart variable
+    ```  
     </details>          
