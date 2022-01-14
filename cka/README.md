@@ -603,7 +603,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     k get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{"\n"}{end}' # listing podnames with range  
     k get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels}{"\t"}{"\n"}{end}' # listing pod names and labels
     k get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[].image}{"\t"}{"\n"}{end}' # listing pod names and images
-    k get pod -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[*].resources}{"\n"}{end}' # listing pod resources  
+    k get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[*].resources}{"\n"}{end}' # listing pod resources  
     ```
     </details>   
 <h2>Troubleshooting</h2>
