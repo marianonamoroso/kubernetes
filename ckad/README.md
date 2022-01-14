@@ -907,7 +907,31 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```      
 
        </details>           
-     
+ 
+46. <b>Create a pod with image nginx called nginx and expose its port 80. Confirm that ClusterIP has been created. Also check endpoints</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run nginx --image=nginx --port 80 --expose -n pyf # also, you create the associated service
+       ```
+       ```
+       k get service/nginx -n pyf      
+       k get pod/nginx -n pyf    
+       k describe service/nginx -n pyf # you can check the service type and endpoint associated with it    
+       ``` 
+       ```
+       k run temp --image=busybox --rm -it -n pyf -- sh 
+       ```      
+       ```
+       wget -O- <CLUSTER_IP>:80 # if you any problem, please restart your coredns deployment: k rollout restart deployment coredns --namespace kube-system
+       exit      
+       ```      
+      </details>
+      
+47. <b>Get service's ClusterIP, create a temp busybox pod and 'hit' that IP with wget.</b> 
+       <details><summary>Show</summary>      
+      
+      
 <h2>Challenging</h2>  
 
 46. <b>Create an nginx pod called nginx-resolver using image nginx, expose it internally with a service called nginx-resolver-service. Test that you are able to look up the service and pod names from within the cluster. Use the image: busybox:1.28 for dns lookup.</b> 
