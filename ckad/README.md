@@ -933,7 +933,8 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        exit      
        ```
        
-        </details>      
+        </details>
+             
 <h2>Challenging</h2>  
 
 46. <b>Create an nginx pod called nginx-resolver using image nginx, expose it internally with a service called nginx-resolver-service. Test that you are able to look up the service and pod names from within the cluster. Use the image: busybox:1.28 for dns lookup.</b> 
