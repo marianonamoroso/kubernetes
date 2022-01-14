@@ -933,7 +933,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        exit      
        ```
        
-        </details>
+       </details>
              
 <h2>Challenging</h2>  
 
