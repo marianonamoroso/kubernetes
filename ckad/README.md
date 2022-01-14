@@ -923,7 +923,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k run temp --image=busybox --rm -it -n pyf -- sh 
        ```      
        ```
-       wget -O- <CLUSTER_IP>:80 # if you any problem, please restart your coredns deployment: k rollout restart deployment coredns --namespace kube-system
+       wget -O- <CLUSTER_IP>:80 # if you have any problem, please restart your coredns deployment and try it again: k rollout restart deployment coredns --namespace kube-system
        exit      
        ```      
       </details>
