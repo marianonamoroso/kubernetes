@@ -665,7 +665,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       
     </details>        
       
-- <b>Monitoring</b>            
+- <b>Monitoring Components</b>            
     <details><summary>Show</summary>
     
     Install the metrics server and show metrics for nodes and for pods in kube-system namespace.
@@ -689,3 +689,44 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       - --kubelet-insecure-tls # you have to add the following line
     ```  
     </details>         
+
+- <b>Monitoring Applications</b>            
+    <details><summary>Show</summary>
+    
+    Create an nginx pod with a liveness and a readiness probe for the port 80.
+    ```
+    k run nginx-monitor --image=nginx --labels=env=monitor --port=80 --dry-run=client -o yaml> nginx-monitor.yaml
+    vi nginx-monitor.yaml  
+    ```      
+    ```
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      creationTimestamp: null
+      labels:
+        env: monitor
+      name: nginx-monitor
+    spec:
+      containers:
+      - image: nginx
+        name: nginx-monitor
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5  
+     ```
+     ```
+     k create -f nginx-monitor.yaml 
+     k get pod/nginx-monitor
+     k describe pod/nginx-monitor  
+     ``` 
