@@ -667,6 +667,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       
 - <b>Monitoring</b>            
     <details><summary>Show</summary>
+    
     Install the metrics server and show metrics for nodes and for pods in kube-system namespace.
     ```
     k top pod # You should see the following error: Metrics API not available  
