@@ -594,7 +594,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     ```
     </details>
        
-2. <b>Expose it's port 80 through a service of type NodePort.<b>
+2. <b>Expose it's port 80 through a service of type NodePort.</b>
      <details><summary>Show</summary>
 
     ```
@@ -603,7 +603,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     ```
     </details>
        
-3. <b>Show all elements, including the endpoints.<b>
+3. <b>Show all elements, including the endpoints.</b>
     <details><summary>Show</summary>
 
     ```
@@ -613,7 +613,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     </details>  
        
        
-4. <b>Get the nginx index page through the NodePort.<b>      
+4. <b>Get the nginx index page through the NodePort.</b>      
     <details><summary>Show</summary>
 
     ```
