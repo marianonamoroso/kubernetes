@@ -674,5 +674,17 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     ```
     kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.2/components.yaml  
     k top pod -n kube-system # You have to wait for the server to get metrics
+    ```
+    If you have the following error "Readiness probe failed: HTTP probe failed with statuscode: 500" you have to add "- --kubelet-insecure-tls" on the container section. 
+    ```  
+    k edit deploy -n kube-system metrics-server  
+    ```  
+    ```  
+    containers:
+    - args:
+      - --cert-dir=/tmp
+      - --secure-port=8448
+      - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+      - --kubelet-insecure-tls # you have to add the following line
     ```  
     </details>         
