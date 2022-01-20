@@ -665,4 +665,16 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       
     </details>        
       
-      
+<h3>Monitoring</h3>
+
+- <b>Cluster</b>            
+    <details><summary>Show</summary>
+
+    ```
+    k top pod # You should see the following error: Metrics API not available  
+    ```
+    ```
+    kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.2/components.yaml  
+    k top pod -n kube-system # You have to wait for the server to get metrics
+    ```  
+    </details>         
