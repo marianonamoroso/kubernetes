@@ -693,7 +693,6 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 - <b>Monitoring Applications</b>            
     <details><summary>Show</summary>
     
-    Create an nginx pod with a liveness and a readiness probe for the port 80.
     ```
     k run nginx-monitor --image=nginx --labels=env=monitor --port=80 --dry-run=client -o yaml> nginx-monitor.yaml
     vi nginx-monitor.yaml  
