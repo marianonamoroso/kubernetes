@@ -622,7 +622,41 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     wget -O- <INTERNAL_NODE_IP>:<NODE_PORT> 
     ```
     </details>       
+
+<h3>Ingress</h3>
        
+1. <b>Keep the previous deployment of nginx and add a new deployment using the image bitnami/apache with two replicas.</b>
+    <details><summary>Show</summary>
+
+    ```
+    XXXX
+    ```
+    </details>      
+
+2. <b>Expose its port 8080 through a service and query it.</b>
+    <details><summary>Show</summary>
+
+    ```
+    XXXX
+    ```
+    </details>    
+      
+3. <b>Deploy nginx ingress controller</b>
+    <details><summary>Show</summary>
+
+    ```
+    XXXX
+    ```
+    </details>    
+
+4. <b>Create an ingress service that redirects /nginx to the nginx service and /apache to the apache service.</b>
+    <details><summary>Show</summary>
+
+    ```
+    XXXX
+    ```
+    </details>  
+         
 <h2>Observability</h2>
            
 <h3>JSONPath</h3>
