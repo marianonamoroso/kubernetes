@@ -580,6 +580,48 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     sudo kubeadm certs check-expiration # you have to see a new expiration date on apiserver
     ``` 
     </details> 
+ 
+<h2>Services & Networking</h2>
+           
+<h3>Service Types</h3>
+       
+1. <b>Create a deployment with the latest nginx image and two replicas.</b>
+    <details><summary>Show</summary>
+
+    ```
+    k create deployment deploy-net --image=nginx:latest --replicas=2
+    k get deployment deploy-net
+    ```
+    </details>
+       
+2. <b>Expose it's port 80 through a service of type NodePort.<b>
+     <details><summary>Show</summary>
+
+    ```
+    k expose deployment deploy-net --type=NodePort --port=80 --target-port=80
+    k get service/deploy-net # you have to check the two endpoints associated with the deployment
+    ```
+    </details>
+       
+3. <b>Show all elements, including the endpoints.<b>
+    <details><summary>Show</summary>
+
+    ```
+    k get ep deploy-net
+    k describe ep deploy-net  
+    ```
+    </details>  
+       
+       
+4. <b>Get the nginx index page through the NodePort.<b>      
+    <details><summary>Show</summary>
+
+    ```
+    k get pod -l app=deploy-net -o wide # you have to check which node is the host
+    k get node -o wide # you have to copy the internal ipv4
+    wget -O- <INTERNAL_NODE_IP>:<NODE_PORT> 
+    ```
+    </details>       
        
 <h2>Observability</h2>
            
