@@ -30,6 +30,8 @@ Finally, I'll share with you my environment used for practicing CKA's required t
   - SSH Key
   - Name: worker-node
 
+You can deploy the infrastructure listed before executing the following terraform template: https://github.com/marianonamoroso/kubernetes/tree/main/cka/terraform
+
 <h3>SSH Connection</h3>
 
 ```
