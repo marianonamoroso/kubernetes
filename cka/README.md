@@ -629,7 +629,9 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     <details><summary>Show</summary>
 
     ```
-    XXXX
+    k create deployment bitnami --image=bitnami/apache:latest --replicas=2
+    k get deployment
+    k get pod
     ```
     </details>      
 
@@ -637,7 +639,11 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     <details><summary>Show</summary>
 
     ```
-    XXXX
+    k expose deployment bitnami --port=8080 --target-port=8080 --type=NodePort
+    k describe svc bitnami
+    k get pod -o wide
+    k get node -o wide
+    curl <NODE_IP>:8080  
     ```
     </details>    
       
@@ -645,7 +651,8 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     <details><summary>Show</summary>
 
     ```
-    XXXX
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.46.0/deploy/static/provider/baremetal/deploy.yaml
+    k get svc -n ingress-nginx  
     ```
     </details>    
 
@@ -653,8 +660,37 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     <details><summary>Show</summary>
 
     ```
-    XXXX
+    vi ingress.yaml
     ```
+    ```
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: web-ingress
+    spec:
+      rules:
+      - host: nginx-apache.com
+        http:
+          paths:
+          - path: /nginx
+            pathType: Prefix
+            backend:
+              service:
+                name: deploy-net # nginx service name
+                port:
+                  number: 80 # nginx deployment port
+          - path: /apache
+            pathType: Prefix
+            backend:
+              service:
+                name: bitnami # bitnami service name
+                port:
+                  number: 8080 # nginx deployment port
+    ```
+    ```
+    k create -f ingress.yaml 
+    k describe ingress web-ingress  
+    ```  
     </details>  
          
 <h2>Observability</h2>
