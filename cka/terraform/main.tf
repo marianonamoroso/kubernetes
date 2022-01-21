@@ -8,5 +8,6 @@ resource "aws_instance" "node" {
   tags = {
     deployment  = "TF"
     cert        = "CKA"
+    author      = "MA"
   }
 }
