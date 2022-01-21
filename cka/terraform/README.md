@@ -1,0 +1,1 @@
+You can deploy the infrastructure needed to study for the CKA exam. Also, you can check my summary for tackling HashiCorp Certified Terraform Associate exam: https://github.com/marianonamoroso/terraform
