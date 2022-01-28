@@ -182,8 +182,9 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```
       ```
       sudo ETCDCTL_API=3 etcdctl --data-dir /var/lib/etcd-backup snapshot restore etcd-snapshot.db \
-       --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key \
-       --initial-cluster=master=<YOUR_URL>:<PORT> --initial-advertise-peer-urls=<YOUR_URL>:<PORT> --name master
+       --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt \
+       --key=/etc/kubernetes/pki/etcd/server.key --initial-cluster=master=<YOUR_URL>:<PORT> \
+       --initial-advertise-peer-urls=<YOUR_URL>:<PORT> --name master
       ``` 
       ```
       sudo ls /var/lib/etcd-backup/  
