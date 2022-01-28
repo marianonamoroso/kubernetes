@@ -149,7 +149,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
      <details><summary>Show</summary>
 
       ```
-      sudo apt  install etcd-client # on your master node 
+      sudo apt install etcd-client # on your master node 
       etcdctl --help
       ```
 
