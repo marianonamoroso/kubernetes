@@ -159,7 +159,9 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
      <details><summary>Show</summary>
 
       ```
-      sudo cat /etc/kubernetes/manifests/etcd.yaml | grep -i /etc/kubernetes/pki
+      k describe -n kube-system pod etcd-master # here you can copy all the information needed for saving your backup
+      ```
+      ```
       sudo ETCDCTL_API=3 etcdctl snapshot save etcd-snapshot.db \ # backup file "etcd-snapshot.db
       --cacert "/etc/kubernetes/pki/etcd/ca.crt" \ # trusted-ca-file
       --cert="/etc/kubernetes/pki/etcd/server.crt" \ # cert-file
@@ -176,13 +178,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
      <details><summary>Show</summary>
       
       ```
-      sudo cat /etc/kubernetes/manifests/etcd.yaml # you can check the hostPath directory for ETCD 
-      ``` 
-      ```
-      - hostPath:
-          path: /var/lib/etcd # here
-          type: DirectoryOrCreate
-          name: etcd-data
+      k describe -n kube-system pod etcd-master # here you can copy all the information needed for restoring your backup
       ```
       ```
       sudo ETCDCTL_API=3 etcdctl --data-dir /var/lib/etcd-backup snapshot restore etcd-snapshot.db --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --initial-cluster=master=<YOUR_URL>:<PORT> --initial-advertise-peer-urls=<YOUR_URL>:<PORT> --name master 
