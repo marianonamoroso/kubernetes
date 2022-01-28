@@ -193,7 +193,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       ```
       ```
       volumeMounts:
-      - mountPath: /var/lib/myetcd
+      - mountPath: /var/lib/etcd-backup
         name: etcd-data
       - mountPath: /etc/kubernetes/pki/etcd
         name: etcd-certs
