@@ -204,7 +204,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
           name: etcd-data
       ```
       ``` 
-      k get pod -A # you have to wait few minutes
+      k get pod -A # you have to wait few minutes; if you have any problem execute: sudo systemctl restart kubelet;strace -eopenat kubectl version;k get nodes
       ```
       </details>
 
