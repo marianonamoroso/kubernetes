@@ -348,7 +348,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
     ```
     alias k='kubectl'
-    export do='—dry-run=client -o yaml'
+    export do='--dry-run=client -o yaml'
     ```
     </details>
         
@@ -768,6 +768,8 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     <details><summary>Show</summary>
 
     ```
+    k config get-contexts # you can list all contexts
+    k config current-context # also, you can execute the following command: cat ~/.kube/config | grep current
     k config view # you have to check server IP and PORT (6443) 
     ```   
     ```

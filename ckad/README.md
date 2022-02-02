@@ -284,6 +284,41 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        k get pods -n pyf -o wide
        ```
        </details>
+
+23. <b>Create a single pod of image httpd:latest. The pod should be named pod-schedule and the container should be named pod-schedule-container. It should only be scheduled on a master node.</b> 
+      <details><summary>Show</summary>
+      
+      ```
+      k get node
+      k describe node master | grep -i Taints
+      k get node master --show-labels # also, you can execute the following command: k describe  node master |grep -i labels -A 10
+      ```
+      ```      
+      k run pod-schedule --image=httpd:latest --dry-run=client -o yaml > 23-pod.yaml
+      vi 23-pod.yaml
+      ```
+      ```
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        labels:
+          run: pod-schedule
+        name: pod-schedule
+      spec:
+        containers:
+        - image: httpd:latest
+          name: pod-schedule-container
+        tolerations:        
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+        nodeSelector:                       
+          node-role.kubernetes.io/master: "" 
+      ```
+      ```
+      k create -f 23-pod.yaml
+      k get pod -o wide|grep -i pod-schedule
+      ```
+      </details>   
       
 <h2>Configurations</h2>
       
