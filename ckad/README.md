@@ -588,8 +588,8 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        <details><summary>Show</summary>
        
        ```
-       k run nginx-readiness --image=nginx --namespace=pyf --port=80 --dry-run=client -o yaml > 33-pod.yml
-       vi 33-pod.yml
+       k run nginx-readiness --image=nginx --namespace=pyf --port=80 --dry-run=client -o yaml > 32-pod.yml
+       vi 32-pod.yml
        ```
        ``` 
        apiVersion: v1
@@ -612,9 +612,51 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
                port: 80     
        ```
        ``` 
-       k create -f 33-pod.yml
+       k create -f 32-pod.yml
        k get pod -n pyf      
        ```      
+       </details>  
+
+33. <b>Create a pod named not-ready-pod of image busybox. Configure a livenessprobe which simply runs "true". Also configure a readinessprobe which does check if the url http://svc-check:8080 is reachable executing the command curl or wget. 
+Create a service named svc-check with the selector svc=ready. Finally, create second pod named ready-pod of image nginx with label svc=ready with the target port 8080. 
+       <details><summary>Show</summary>
+       
+       ```
+       k run not-ready-pod --image=nginx --dry-run=client -o yaml -- echo "Hi I'm your POD" > 33-not-ready-pod.yaml
+       vi 33-not-ready-pod.yaml   
+       ```
+       ``` 
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         labels:
+           run: not-ready-pod
+         name: not-ready-pod
+       spec:
+         containers:
+         - name: not-ready-pod
+           image: nginx
+           livenessProbe:
+             exec:
+               command:      
+               - "true"
+           readinessProbe:
+             exec:
+               command:
+               - sh
+               - -c
+               - "wget -T2 -O- http://svc-check:8080"  
+       ```
+       ```
+       k get pod not-ready-pod
+       k describe pod not-ready-pod # svc-check doesn't exist yet
+       ```
+       ```
+       k run ready-pod --image=nginx --port=80 --labels=svc=ready
+       k expose pod ready-pod --target-port=80 --name=svc-check
+       k describe svc svc-check
+       ```
+           
        </details>  
       
 34. <b>Use JSON PATH query to retrieve the osImages of all the nodes.</b> 
