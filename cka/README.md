@@ -702,8 +702,22 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     </details>  
          
 <h2>Observability</h2>
-           
-<h3>JSONPath</h3>
+
+<h3>Cluster Information</h3>
+       
+- <b>Master</b>        
+    <details><summary>Show</summary>
+
+    ```
+    ps aux | grep -i kubelet # process
+    k get pod -n kube-system # static-pods
+    k get ds -n kube-system # deamonsets
+    k get deploy -n kube-system # deployments
+    ```
+    </details>       
+
+
+<h3>JSONPath & More</h3>
        
 - <b>Nodes</b>        
     <details><summary>Show</summary>
@@ -712,6 +726,10 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     k get nodes -o jsonpath='{.items[*].metadata.name}{"\n"}' # listing nodenames
     k get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{"\n"}{end}' # listing nodenames with range  
     k get nodes -o jsonpath='{.items[1].metadata.labels}{"\n"}' # listing node[1] labels
+    ```
+    ```
+    k get node -A --sort-by=.metadata.name
+    k get node -A --sort-by=.metadata.uid
     ```
     </details>       
 
@@ -725,6 +743,10 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     k get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[].image}{"\t"}{"\n"}{end}' # listing pod names and images
     k get pods -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.containers[*].resources}{"\n"}{end}' # listing pod resources  
     ```
+    ```
+    k get pod -A --sort-by=.metadata.creationTimestamp
+    k get pod -A --sort-by=.metadata.name
+    ```  
     </details>   
 <h2>Troubleshooting</h2>
        
