@@ -200,6 +200,17 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k describe pod -n pyf | grep -i image:
       ```
       </details>
+
+17. <b>Create a deployment named deploy-critical with label severity=critical and 3 replicas. It should contain two containers, the first named container-nginx-1 with image nginx:latest and the second one named container-nginx-2 with image kubernetes/pause. You should run only two pods on the worker nodes and the third pod won't be scheduled (we have only two worker nodes).</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k create deployment deploy-critical --image=nginx:latest --replicas=3 --dry-run=client -o yaml > 17-deploy.yaml
+      vi 17-deploy.yaml
+      ```
+      ```
+      ```
+      </details>
 <h2>Scheduling</h2>
       
 17. <b>Shedule a nginx pod on specific node using NodeName.</b> 
