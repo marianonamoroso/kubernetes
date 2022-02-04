@@ -86,6 +86,51 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k describe pod/nginx-test -n pyf | grep -i env -A1
       k exec -it nginx-test -n pyf -- env
       ```
+      </details>
+
+10. <b>Create a daemonset named ds-ckad with image httpd:latest and labels id=ds-ckad and uuid=1235-5555-2356-3212 in the pyf namespace with 100 millicore cpu and 100 mebibyte memory. Also, the pods should run on all nodes.</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k describe node master |grep -i taints # you can check the tolerations.
+      vi ds-10.yaml
+      ```
+      ```
+      apiVersion: apps/v1
+      kind: DaemonSet
+      metadata:
+        name: ds-ckad
+        namespace: pyf
+        labels:
+          id: ds-ckad
+          uuid: 1235-5555-2356-3212
+      spec:
+        selector:
+          matchLabels:
+            id: ds-ckad
+            uuid: 1235-5555-2356-3212
+        template:
+          metadata:
+            labels:
+              id: ds-ckad
+              uuid: 1235-5555-2356-3212
+          spec:
+            containers:
+            - name: ds-ckad 
+              image: httpd:latest
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 100Mi
+            tolerations:
+              - key: node-role.kubernetes.io/master
+                effect: "NoSchedule"
+      ```
+      ```
+      k create -f ds-10.yaml
+      k get daemonset.apps/ds-ckad -n pyf
+      k get pod -n pyf -o wide |grep -i ds-ckad # you should see the pods on each node (also master)
+      ```
       </details>     
 
 <h2>Deployments</h2>
