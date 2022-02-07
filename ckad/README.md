@@ -133,61 +133,6 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       ```
       </details>  
 
-11. <b>Create a pod named multi-container with four containers, named c1, c2 and c3. There should be a volume attached to that pod and mounted into every container, but the volume shouldn't be persisted or shared with other pods. 
-Container c1 should be of image nginx:latest and have the name of the node where its pod is running on value available as environment variable MY_NODE_NAME.
-Container c2 should be of image busybox and write the output of the date command every second in the shared volume into file date.log. You can use "while true; do date >> /your/vol/path/date.log; sleep 1; done".
-Container c3 should be of image busybox and constantly send the content of file date.log from the shared volume to stdout. You can use tail -f /your/vol/path/date.log for this.
-
-</b> 
-      <details><summary>Show</summary>
-
-      ```
-      k run multi-container --image=nginx:latest --dry-run=client -o yaml > 11-multi-pod.yaml
-      vi 11-multi-pod.yaml
-      ```
-      ```
-      apiVersion: v1
-      kind: Pod
-      metadata:
-        labels:
-          run: multi-container
-        name: multi-container
-      spec:
-        volumes:
-          - name: pod-volume
-            emptyDir: {}
-        containers:
-        - image: nginx:latest
-          name: c1
-          volumeMounts:
-          - mountPath: /vol
-            name: pod-volume
-          env:
-          - name: MY_NODE_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: spec.nodeName
-            name: pod-volume
-        - image: busybox
-          name: c2
-          command: ["/bin/sh", "-c", "while true; do date >> /vol/date.log; sleep 1;done"]
-          volumeMounts:
-          - mountPath: /vol
-            name: pod-volume
-        - image: busybox
-          name: c3
-          command: ["/bin/sh", "-c", "tail -f /vol/date.log"]
-          volumeMounts:
-          - mountPath: /vol
-            name: pod-volume
-      ```
-      ```
-      k create -f 11-multi-pod.yaml
-      k get pod multi-container
-      k logs multi-container -c c3 # you have to see the logs of date.log
-      ```
-      </details>      
-
 <h2>Deployments</h2>
 
 10. <b>Create a deployment named hr-app using the image nginx:1.18 with 2 replicas.</b> 
@@ -1361,4 +1306,61 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
        ```
        k run --image=busybox temp --rm -it --namespace=pyf -- wget -O- -T 5 10.44.0.9:80      
        ```      
-       </details>      
+       </details>    
+
+
+11. <b>Create a pod named multi-container with four containers, named c1, c2 and c3. There should be a volume attached to that pod and mounted into every container, but the volume shouldn't be persisted or shared with other pods. 
+Container c1 should be of image nginx:latest and have the name of the node where its pod is running on value available as environment variable MY_NODE_NAME.
+Container c2 should be of image busybox and write the output of the date command every second in the shared volume into file date.log. You can use "while true; do date >> /your/vol/path/date.log; sleep 1; done".
+Container c3 should be of image busybox and constantly send the content of file date.log from the shared volume to stdout. You can use tail -f /your/vol/path/date.log for this.
+
+</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k run multi-container --image=nginx:latest --dry-run=client -o yaml > 11-multi-pod.yaml
+      vi 11-multi-pod.yaml
+      ```
+      ```
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        labels:
+          run: multi-container
+        name: multi-container
+      spec:
+        volumes:
+          - name: pod-volume
+            emptyDir: {}
+        containers:
+        - image: nginx:latest
+          name: c1
+          volumeMounts:
+          - mountPath: /vol
+            name: pod-volume
+          env:
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+            name: pod-volume
+        - image: busybox
+          name: c2
+          command: ["/bin/sh", "-c", "while true; do date >> /vol/date.log; sleep 1;done"]
+          volumeMounts:
+          - mountPath: /vol
+            name: pod-volume
+        - image: busybox
+          name: c3
+          command: ["/bin/sh", "-c", "tail -f /vol/date.log"]
+          volumeMounts:
+          - mountPath: /vol
+            name: pod-volume
+      ```
+      ```
+      k create -f 11-multi-pod.yaml
+      k get pod multi-container
+      k logs multi-container -c c3 # you have to see the logs of date.log
+      ```
+      </details>      
+  
