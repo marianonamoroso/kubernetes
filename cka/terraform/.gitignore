@@ -2,6 +2,7 @@
 **/.terraform/*
 .terraform.lock.hcl
 
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
@@ -9,6 +10,8 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+key.tf
+provider.tf
 
 # log files
 crash.log
