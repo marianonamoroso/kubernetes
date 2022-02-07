@@ -133,6 +133,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       <details><summary>Show</summary>
 
       ```
+      sudo swapoff -a # you have to execute the command in both worker nodes.
       kubeadm token create --print-join-command # you have to execute it on the master node
       ```
       ```  
