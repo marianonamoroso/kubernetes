@@ -131,7 +131,62 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k get daemonset.apps/ds-ckad -n pyf
       k get pod -n pyf -o wide |grep -i ds-ckad # you should see the pods on each node (also master)
       ```
-      </details>     
+      </details>  
+
+11. <b>Create a pod named multi-container with four containers, named c1, c2 and c3. There should be a volume attached to that pod and mounted into every container, but the volume shouldn't be persisted or shared with other pods. 
+Container c1 should be of image nginx:latest and have the name of the node where its pod is running on value available as environment variable MY_NODE_NAME.
+Container c2 should be of image busybox and write the output of the date command every second in the shared volume into file date.log. You can use "while true; do date >> /your/vol/path/date.log; sleep 1; done".
+Container c3 should be of image busybox and constantly send the content of file date.log from the shared volume to stdout. You can use tail -f /your/vol/path/date.log for this.
+
+</b> 
+      <details><summary>Show</summary>
+
+      ```
+      k run multi-container --image=nginx:latest --dry-run=client -o yaml > 11-multi-pod.yaml
+      vi 11-multi-pod.yaml
+      ```
+      ```
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        labels:
+          run: multi-container
+        name: multi-container
+      spec:
+        volumes:
+          - name: pod-volume
+            emptyDir: {}
+        containers:
+        - image: nginx:latest
+          name: c1
+          volumeMounts:
+          - mountPath: /vol
+            name: pod-volume
+          env:
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+            name: pod-volume
+        - image: busybox
+          name: c2
+          command: ["/bin/sh", "-c", "while true; do date >> /vol/date.log; sleep 1;done"]
+          volumeMounts:
+          - mountPath: /vol
+            name: pod-volume
+        - image: busybox
+          name: c3
+          command: ["/bin/sh", "-c", "tail -f /vol/date.log"]
+          volumeMounts:
+          - mountPath: /vol
+            name: pod-volume
+      ```
+      ```
+      k create -f 11-multi-pod.yaml
+      k get pod multi-container
+      k logs multi-container -c c3 # you have to see the logs of date.log
+      ```
+      </details>      
 
 <h2>Deployments</h2>
 
@@ -201,13 +256,50 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       ```
       </details>
 
-17. <b>Create a deployment named deploy-critical with label severity=critical and 3 replicas. It should contain two containers, the first named container-nginx-1 with image nginx:latest and the second one named container-nginx-2 with image kubernetes/pause. You should run only two pods on the worker nodes and the third pod won't be scheduled (we have only two worker nodes).</b> 
+17. <b>Create a deployment named deploy-critical with label severity=critical and 3 replicas. It should contain two containers, the first named container-1 with image nginx:latest and the second one named container-2 with image kubernetes/pause. You should run only two pods on the worker nodes and the third pod won't be scheduled (we have only two worker nodes).</b> 
       <details><summary>Show</summary>
 
       ```
       k create deployment deploy-critical --image=nginx:latest --replicas=3 --dry-run=client -o yaml > 17-deploy.yaml
       vi 17-deploy.yaml
       ```
+      ```
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        labels:
+          severity: critical
+        name: deploy-critical
+      spec:
+        replicas: 3
+        selector:
+          matchLabels:
+            severity: critical
+        strategy: {}
+        template:
+          metadata:
+            labels:
+              severity: critical
+          spec:
+            containers:
+            - image: nginx:latest
+              name: container-1
+            - image: kubernetes/pause
+              name: container-2
+            affinity:
+              podAntiAffinity:
+                requiredDuringSchedulingIgnoredDuringExecution:
+                - labelSelector:
+                    matchExpressions:
+                    - key: severity
+                      operator: In
+                      values:
+                      - critical
+                  topologyKey: kubernetes.io/hostname
+      ```
+      ```
+      k create -f 17-deploy.yaml
+      k get pod -o wide # you should see only two pods running
       ```
       ```
       </details>
