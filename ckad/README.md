@@ -711,7 +711,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        </details>  
 
 33. <b>Create a pod named not-ready-pod of image busybox. Configure a livenessprobe which simply runs "true". Also configure a readinessprobe which does check if the url http://svc-check:8080 is reachable executing the command curl or wget. 
-Create a service named svc-check with the selector svc=ready. Finally, create second pod named ready-pod of image nginx with label svc=ready with the target port 8080. 
+Create a service named svc-check with the selector svc=ready. Finally, create second pod named ready-pod of image nginx with label svc=ready with the target port 8080. </b> 
        <details><summary>Show</summary>
        
        ```
