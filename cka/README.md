@@ -762,6 +762,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 - <b>Namespaces</b>        
     <details><summary>Show</summary>
+    
     ```
     k api-resources --namespaced -o name # list all namespaced kubernetes resources
     ```
