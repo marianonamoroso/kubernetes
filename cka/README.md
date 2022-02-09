@@ -710,7 +710,11 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     <details><summary>Show</summary>
 
     ```
+    k get nodes # nodes
+    sudo cat /etc/kubernetes/manifests/kube-apiserver.yaml # CIDR:service-cluster-ip-range=<IP>/<CIDR> (master)
+    sudo find /etc/cni/net.d # networking or CNI (master)
     ps aux | grep -i kubelet # process
+    ```
     k get pod -n kube-system # static-pods
     k get ds -n kube-system # deamonsets
     k get deploy -n kube-system # deployments
@@ -747,8 +751,30 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     ```
     k get pod -A --sort-by=.metadata.creationTimestamp
     k get pod -A --sort-by=.metadata.name
+    ```
+    ```
+    k get pod -o wide # you have to check on which node the pod was provisioned
+    crictl ps | grep -i pod-crictl # ssh <WORKER_NODE>
+    crictl inspect <ID> | grep runtimeType
+    crictl logs <ID> # ssh <WORKER_NODE> 'crictl logs <ID>' &> pod-crictl.log
     ```  
     </details>   
+
+- <b>Namespaces</b>        
+    <details><summary>Show</summary>
+    ```
+    k api-resources --namespaced -o name # list all namespaced kubernetes resources
+    ```
+    ```
+    k get events -A --sort-by=.metadata.creationTimestamp
+    ```
+    ```
+    k delete pod deploy-critical-69bbc84d78-p47rb # forcing pod deletion
+    kubectl get events -n default --sort-by=.metadata.creationTimestamp | grep -i kill # you can check the logs 
+    ```
+    </details>  
+
+    
 <h2>Troubleshooting</h2>
        
 - <b>Kubelet Issues</b>        
