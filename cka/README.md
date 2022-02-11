@@ -589,7 +589,22 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     sudo kubeadm certs check-expiration # you have to see a new expiration date on apiserver
     ``` 
     </details> 
- 
+
+3. <b>View Certificates</b>      
+    <details><summary>Show</summary>
+
+    ```  
+    sudo openssl x509  -noout -text -in /var/lib/kubelet/pki/kubelet-client-current.pem |grep -i "Issuer" # kubelet client certificate
+    sudo openssl x509  -noout -text -in /var/lib/kubelet/pki/kubelet-client-current.pem | grep -i -A1 "Extended Key Usage" # kubelet client certificate
+    ```
+    ``` 
+    sudo openssl x509  -noout -text -in /var/lib/kubelet/pki/kubelet.crt | grep Issuer # kubelet server certificate
+    sudo openssl x509  -noout -text -in /var/lib/kubelet/pki/kubelet.crt | grep "Extended Key Usage" -A1 # kubelet server certificate
+    ```
+    </details> 
+    
+
+    
 <h2>Services & Networking</h2>
            
 <h3>Service Types</h3>
