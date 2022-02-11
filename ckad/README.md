@@ -1308,6 +1308,38 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
        ```      
        </details>    
 
+52. <b>Create a static pod named static-pod on master node with the image nginx and have resource requests for 50m CPU and 30Mi memory. Then create a NodePort service named static-pod-service which exposes that static pod on port 80.</b> 
+       <details><summary>Show</summary>
+       
+       ```
+       k run static-pod --image=nginx --namespace=default --dry-run=client -o yaml > static-pod.yaml
+       vi static-pod.yaml
+       ```
+       ```
+       apiVersion: v1
+       kind: Pod
+       metadata:
+         labels:
+           run: static-pod
+         name: static-pod
+       spec:
+         containers:
+         - image: nginx
+           name: static-pod
+           resources:
+             requests:
+               memory: "30Mi"
+               cpu: "50m"
+       ```
+       ```
+       sudo vi /etc/kubernetes/manifests/static-pod.yaml # you have to create the yaml inside the path
+       ```
+       ```
+       k get pod | grep -i static-pod
+       ```      
+       </details>    
+
+
 
 <!-- 53. <b>Create a pod named multi-container with four containers, named c1, c2 and c3. There should be a volume attached to that pod and mounted into every container, but the volume shouldn't be persisted or shared with other pods. 
 Container c1 should be of image nginx:latest and have the name of the node where its pod is running on value available as environment variable MY_NODE_NAME.
