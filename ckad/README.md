@@ -135,7 +135,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
 
 <h2>Deployments</h2>
 
-10. <b>Create a deployment named hr-app using the image nginx:1.18 with 2 replicas.</b> 
+11. <b>Create a deployment named hr-app using the image nginx:1.18 with 2 replicas.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -143,7 +143,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k get -n pyf deployment.apps/hr-app
       ```
       </details> 
-11. <b>Scale hr-app deployment to 3 replicas.</b> 
+12. <b>Scale hr-app deployment to 3 replicas.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -151,7 +151,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k get -n pyf deployment.apps/hr-app
       ```
       </details>
-12. <b>Update the hr-app image to nginx:1.19.</b> 
+13. <b>Update the hr-app image to nginx:1.19.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -159,7 +159,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k describe deployments/hr-app -n pyf | grep -i image
       ```
       </details>      
-13. <b>Check the rollout history of hr-app and confirm that the replicas are OK.</b> 
+14. <b>Check the rollout history of hr-app and confirm that the replicas are OK.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -169,7 +169,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k get pod -n pyf
       ```
       </details>       
-14. <b>Undo the latest rollout and verify that new pods have the old image (nginx:1.18)</b> 
+15. <b>Undo the latest rollout and verify that new pods have the old image (nginx:1.18)</b> 
       <details><summary>Show</summary>
 
       ```
@@ -180,7 +180,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k get pod -n pyf
       ```
       </details>     
-15. <b>Do an update of the deployment with a wrong image nginx:1.91 and check the status.</b> 
+16. <b>Do an update of the deployment with a wrong image nginx:1.91 and check the status.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -190,7 +190,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k describe pod -n pyf <pod_name> #Error: ErrImagePull
       ```
       </details>          
-16. <b>Return the deployment to working state and verify the image is nginx:1.19.</b> 
+17. <b>Return the deployment to working state and verify the image is nginx:1.19.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -201,12 +201,12 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       ```
       </details>
 
-17. <b>Create a deployment named deploy-critical with label severity=critical and 3 replicas. It should contain two containers, the first named container-1 with image nginx:latest and the second one named container-2 with image kubernetes/pause. You should run only two pods on the worker nodes and the third pod won't be scheduled (we have only two worker nodes).</b> 
+18. <b>Create a deployment named deploy-critical with label severity=critical and 3 replicas. It should contain two containers, the first named container-1 with image nginx:latest and the second one named container-2 with image kubernetes/pause. You should run only two pods on the worker nodes and the third pod won't be scheduled (we have only two worker nodes).</b> 
       <details><summary>Show</summary>
 
       ```
-      k create deployment deploy-critical --image=nginx:latest --replicas=3 --dry-run=client -o yaml > 17-deploy.yaml
-      vi 17-deploy.yaml
+      k create deployment deploy-critical --image=nginx:latest --replicas=3 --dry-run=client -o yaml > 18-deploy.yaml
+      vi 18-deploy.yaml
       ```
       ```
       apiVersion: apps/v1
@@ -243,14 +243,14 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
                   topologyKey: kubernetes.io/hostname
       ```
       ```
-      k create -f 17-deploy.yaml
+      k create -f 18-deploy.yaml
       k get pod -o wide # you should see only two pods running
       ```
       ```
       </details>
 <h2>Scheduling</h2>
       
-17. <b>Shedule a nginx pod on specific node using NodeName.</b> 
+19. <b>Shedule a nginx pod on specific node using NodeName.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -260,7 +260,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k get pods -n pyf -o wide |grep -i nginx-worker1
       ```
       </details>      
-18. <b>Schedule a nginx pod based on node label using nodeSelector.</b> 
+20. <b>Schedule a nginx pod based on node label using nodeSelector.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -272,7 +272,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k get pod -n pyf -o wide
       ```
       </details>  
-19. <b>Taint a node with key=spray, value=mortein and effect=NoSchedule. Check that new pods are not scheduled on it.</b> 
+21. <b>Taint a node with key=spray, value=mortein and effect=NoSchedule. Check that new pods are not scheduled on it.</b> 
       <details><summary>Show</summary>
 
       ```      
@@ -281,7 +281,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k get pods -o wide -n pyf
       ```
       </details>   
-20. <b>Create another pod called nginx-toleration with nginx image, which tolerates the above taint.</b> 
+22. <b>Create another pod called nginx-toleration with nginx image, which tolerates the above taint.</b> 
       <details><summary>Show</summary>
       
       ```
@@ -299,7 +299,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       ```
       </details>         
       
-21. <b>Create a DaemonSet using image fluentd-elasticsearch:1.20.</b> 
+23. <b>Create a DaemonSet using image fluentd-elasticsearch:1.20.</b> 
       <details><summary>Show</summary>
 
       ```
@@ -330,12 +330,12 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       ```
       </details>        
       
-22. <b>Add label color=blue to one node and create nginx deployment called blue with 5 replicas and node Affinity rule to place the pods onto the labeled node.</b> 
+24. <b>Add label color=blue to one node and create nginx deployment called blue with 5 replicas and node Affinity rule to place the pods onto the labeled node.</b> 
       <details><summary>Show</summary>
       
       ```
       k label node worker1 color=blue      
-      k create deployment blue --image=nginx --namespace=pyf --replicas=5 --dry-run=client -o yaml > 22-deployment.yml      
+      k create deployment blue --image=nginx --namespace=pyf --replicas=5 --dry-run=client -o yaml > 24-deployment.yml      
       ```
       ```
       apiVersion: apps/v1
@@ -373,12 +373,12 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
               resources: {}      
        ```      
        ```
-       k apply -f 22-deployment.yml
+       k apply -f 24-deployment.yml
        k get pods -n pyf -o wide
        ```
        </details>
 
-23. <b>Create a single pod of image httpd:latest. The pod should be named pod-schedule and the container should be named pod-schedule-container. It should only be scheduled on a master node.</b> 
+25. <b>Create a single pod of image httpd:latest. The pod should be named pod-schedule and the container should be named pod-schedule-container. It should only be scheduled on a master node.</b> 
       <details><summary>Show</summary>
       
       ```
@@ -387,8 +387,8 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
       k get node master --show-labels # also, you can execute the following command: k describe  node master |grep -i labels -A 10
       ```
       ```      
-      k run pod-schedule --image=httpd:latest --dry-run=client -o yaml > 23-pod.yaml
-      vi 23-pod.yaml
+      k run pod-schedule --image=httpd:latest --dry-run=client -o yaml > 25-pod.yaml
+      vi 25-pod.yaml
       ```
       ```
       apiVersion: v1
@@ -408,14 +408,14 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
           node-role.kubernetes.io/master: "" 
       ```
       ```
-      k create -f 23-pod.yaml
+      k create -f 25-pod.yaml
       k get pod -o wide|grep -i pod-schedule
       ```
       </details>   
       
 <h2>Configurations</h2>
       
-23. <b>Create a configmap named my-config with values key1=val1 and key2=val2. Check it's values.</b> 
+26. <b>Create a configmap named my-config with values key1=val1 and key2=val2. Check it's values.</b> 
        <details><summary>Show</summary>
        
        ```      
@@ -424,15 +424,15 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        </details>  
 
-24. <b>Create a configMap called opt with value key5=val5. Create a new nginx-opt pod that loads the value from key key5 in an env variable called OPTIONS.</b> 
+27. <b>Create a configMap called opt with value key5=val5. Create a new nginx-opt pod that loads the value from key key5 in an env variable called OPTIONS.</b> 
        <details><summary>Show</summary>
        
        ```
        k create configmap opt --from-literal=key5=val5 --namespace=pyf      
        ```
        ```
-       k run nginx-opt --image=nginx --namespace=pyf --dry-run=client -o yaml > 24-pod.yml
-       vi 24-pod.yml      
+       k run nginx-opt --image=nginx --namespace=pyf --dry-run=client -o yaml > 27-pod.yml
+       vi 27-pod.yml      
        ```
        ```
        apiVersion: v1
@@ -455,22 +455,22 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
                    key: key5      
        ```
        ``` 
-       k create -f 24-pod.yml      
+       k create -f 27-pod.yml      
        ```       
        ```      
        k -n pyf exec -it nginx-opt -- env|grep -i OPTIONS
        ```
        </details>       
  
-25. <b>Create a configmap anotherone with values var6=val6 and var7=val7. Load this configmap as an env variables into a nginx-sec pod.</b> 
+28. <b>Create a configmap anotherone with values var6=val6 and var7=val7. Load this configmap as an env variables into a nginx-sec pod.</b> 
        <details><summary>Show</summary>
        
        ```
        k create configmap anotherone --from-literal=var6=val6 --from-literal=var7=val7 --namespace=pyf      
        ```
        ```
-       k run nginx-sec --image=nginx --namespace=pyf --dry-run=client -o yaml > 25-pod.yml
-       vi 25-pod.yml      
+       k run nginx-sec --image=nginx --namespace=pyf --dry-run=client -o yaml > 28-pod.yml
+       vi 28-pod.yml      
        ```
        ```
        apiVersion: v1
@@ -498,22 +498,22 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
                    key: var7        
        ```
        ``` 
-       k create -f 25-pod.yml     
+       k create -f 28-pod.yml     
        ```       
        ```      
        k -n pyf exec -it nginx-sec -- env|grep -i var
        ```
        </details>    
        
-26. <b>Create a configMap cmvolume with values var8=val8 and var9=val9. Load this as a volume inside an nginx-cm pod on path /etc/spartaa. Create the pod and 'ls' into the /etc/spartaa directory.</b> 
+29. <b>Create a configMap cmvolume with values var8=val8 and var9=val9. Load this as a volume inside an nginx-cm pod on path /etc/spartaa. Create the pod and 'ls' into the /etc/spartaa directory.</b> 
        <details><summary>Show</summary>
        
        ```
        k create configmap cmvolume --from-literal=var8=val8 --from-literal=var9=val9 --namespace=pyf  
        ```
        ```
-       k run nginx-cm --image=nginx --namespace=pyf --dry-run=client -o yaml > 26-pod.yml
-       vi 26-pod.yml      
+       k run nginx-cm --image=nginx --namespace=pyf --dry-run=client -o yaml > 29-pod.yml
+       vi 29-pod.yml      
        ```
        ```
        apiVersion: v1
@@ -537,21 +537,21 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
                mountPath: /etc/spartaa    
        ```
        ``` 
-       k create -f 26-pod.yml     
+       k create -f 29-pod.yml     
        ```       
        ```      
        k exec -n pyf nginx-cm -it -- ls /etc/spartaa
        ```
        </details>       
 
-27. <b>Create an nginx-requests pod with requests cpu=100m, memory=256Mi and limits cpu=200m, memory=512Mi.</b> 
+30. <b>Create an nginx-requests pod with requests cpu=100m, memory=256Mi and limits cpu=200m, memory=512Mi.</b> 
        <details><summary>Show</summary>
        
        ```
-       k run nginx-requests --namespace=pyf --image=nginx --dry-run=client -o yaml > 27-pod.yml
+       k run nginx-requests --namespace=pyf --image=nginx --dry-run=client -o yaml > 30-pod.yml
        ```
        ```
-       vi 27-pod.yml      
+       vi 30-pod.yml      
        ```
        ```
        apiVersion: v1
@@ -575,14 +575,14 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
                cpu: "200m"   
        ```
        ``` 
-       k create -f 27-pod.yml     
+       k create -f 30-pod.yml     
        ```       
        ```      
        k describe pod/nginx-requests -n pyf 
        ```
        </details>           
 
-28. <b>Create a secret called mysecret with values password=mypass and check its yaml.</b> 
+31. <b>Create a secret called mysecret with values password=mypass and check its yaml.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -593,12 +593,12 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        </details>        
 
-29. <b>Create an nginx pod that mounts the secret mysecret in a volume on path /etc/foo.</b> 
+32. <b>Create an nginx pod that mounts the secret mysecret in a volume on path /etc/foo.</b> 
        <details><summary>Show</summary>
        
        ```
-       k run nginx-secret --image=nginx --namespace=pyf --dry-run=client -o yaml > 29-pod.yml
-       vi 29-pod.yml      
+       k run nginx-secret --image=nginx --namespace=pyf --dry-run=client -o yaml > 32-pod.yml
+       vi 32-pod.yml      
        ```
        ```
        apiVersion: v1
@@ -623,14 +623,14 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
              readOnly: true
        ```
        ```
-       k create -f 29-pod.yml
+       k create -f 32-pod.yml
        k describe pod nginx-secret -n pyf      
        ```       
        </details> 
       
 <h2>Observability</h2>  
       
-30. <b>Get the list of nodes in JSON format and store it in a file.</b> 
+33. <b>Get the list of nodes in JSON format and store it in a file.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -638,7 +638,7 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        </details> 
       
-31. <b>Get CPU/memory utilization for nodes.</b> 
+34. <b>Get CPU/memory utilization for nodes.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -646,12 +646,12 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
        ```
        </details> 
  
-32. <b>Create an nginx pod with a liveness probe that just runs the command ls. Check probe status.</b> 
+35. <b>Create an nginx pod with a liveness probe that just runs the command ls. Check probe status.</b> 
        <details><summary>Show</summary>
        
        ```
-       k run nginx-liveness --image=nginx --namespace=pyf --dry-run=client -o yaml > 32-pod.yml
-       vi 32-pod.yml
+       k run nginx-liveness --image=nginx --namespace=pyf --dry-run=client -o yaml > 35-pod.yml
+       vi 35-pod.yml
        ```
        ``` 
        apiVersion: v1
@@ -672,17 +672,17 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
                  - ls     
        ```
        ``` 
-       k create -f 32-pod.yml
+       k create -f 35-pod.yml
        k get pod -n pyf      
        ```      
        </details>
 
-32. <b>Create an nginx pod with a liveness probe that just runs the command ls. Check probe status.</b> 
+36. <b>Create an nginx pod with a liveness probe that just runs the command ls. Check probe status.</b> 
        <details><summary>Show</summary>
        
        ```
-       k run nginx-readiness --image=nginx --namespace=pyf --port=80 --dry-run=client -o yaml > 32-pod.yml
-       vi 32-pod.yml
+       k run nginx-readiness --image=nginx --namespace=pyf --port=80 --dry-run=client -o yaml > 36-pod.yml
+       vi 36-pod.yml
        ```
        ``` 
        apiVersion: v1
@@ -705,18 +705,18 @@ kubectl config set-context <your_context> --namespace=pyf # avoiding type the na
                port: 80     
        ```
        ``` 
-       k create -f 32-pod.yml
+       k create -f 36-pod.yml
        k get pod -n pyf      
        ```      
        </details>  
 
-33. <b>Create a pod named not-ready-pod of image busybox. Configure a livenessprobe which simply runs "true". Also configure a readinessprobe which does check if the url http://svc-check:8080 is reachable executing the command curl or wget. 
+37. <b>Create a pod named not-ready-pod of image busybox. Configure a livenessprobe which simply runs "true". Also configure a readinessprobe which does check if the url http://svc-check:8080 is reachable executing the command curl or wget. 
 Create a service named svc-check with the selector svc=ready. Finally, create second pod named ready-pod of image nginx with label svc=ready with the target port 8080. </b> 
        <details><summary>Show</summary>
        
        ```
-       k run not-ready-pod --image=nginx --dry-run=client -o yaml -- echo "Hi I'm your POD" > 33-not-ready-pod.yaml
-       vi 33-not-ready-pod.yaml   
+       k run not-ready-pod --image=nginx --dry-run=client -o yaml -- echo "Hi I'm your POD" > 37-not-ready-pod.yaml
+       vi 37-not-ready-pod.yaml   
        ```
        ``` 
        apiVersion: v1
@@ -752,7 +752,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
            
        </details>  
       
-34. <b>Use JSON PATH query to retrieve the osImages of all the nodes.</b> 
+38. <b>Use JSON PATH query to retrieve the osImages of all the nodes.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -762,11 +762,11 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
       
 <h2>Storage</h2>  
       
-35. <b>Create a PersistentVolume of 1Gi, called 'myvolume-practice'. Make it have accessMode of 'ReadWriteOnce' and 'ReadWriteMany', storageClassName 'normal', mounted on hostPath '/etc/foo'. List all PersistentVolume</b> 
+39. <b>Create a PersistentVolume of 1Gi, called 'myvolume-practice'. Make it have accessMode of 'ReadWriteOnce' and 'ReadWriteMany', storageClassName 'normal', mounted on hostPath '/etc/foo'. List all PersistentVolume</b> 
        <details><summary>Show</summary>
        
        ```
-       vi 35-pv.yml
+       vi 39-pv.yml
        ```
        ```
        apiVersion: v1
@@ -786,16 +786,16 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
            path: /etc/foo
        ```
        ```
-       k create -f 35-pv.yml
+       k create -f 39-pv.yml
        k get pv
        ```      
        </details>   
       
-36. <b>Create a PersistentVolumeClaim called 'mypvc-practice' requesting 400Mi with accessMode of 'ReadWriteOnce' and storageClassName of normal. Check the status of the PersistenVolume.</b> 
+40. <b>Create a PersistentVolumeClaim called 'mypvc-practice' requesting 400Mi with accessMode of 'ReadWriteOnce' and storageClassName of normal. Check the status of the PersistenVolume.</b> 
        <details><summary>Show</summary>
        
        ```
-       vi 36-pv.yml
+       vi 40-pv.yml
        ```
        ```
        apiVersion: v1
@@ -813,16 +813,16 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
          storageClassName: normal
        ```
        ```
-       k create -f 36-pv.yml
+       k create -f 40-pv.yml
        k get pvc -n pyf
        ```      
        </details>         
-37. <b>Create a busybox pod with command 'sleep 3600'. Mount the PersistentVolumeClaim mypvc-practice to '/etc/foo'. Connect to the 'busybox' pod, and copy the '/etc/passwd' file to '/etc/foo/passwd'.</b> 
+41. <b>Create a busybox pod with command 'sleep 3600'. Mount the PersistentVolumeClaim mypvc-practice to '/etc/foo'. Connect to the 'busybox' pod, and copy the '/etc/passwd' file to '/etc/foo/passwd'.</b> 
        <details><summary>Show</summary>
        
        ```
-       k run busybox-pvc --image=busybox --namespace=pyf --dry-run=client -o yaml -- sleep 3600 > 37-pod.yml
-       vi 37-pod.yml
+       k run busybox-pvc --image=busybox --namespace=pyf --dry-run=client -o yaml -- sleep 3600 > 41-pod.yml
+       vi 41-pod.yml
        ```
        ```
        apiVersion: v1
@@ -849,18 +849,18 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
                name: vol-pvc
        ```
        ```
-       k create -f 37-pod.yml 
+       k create -f 41-pod.yml 
        k get pod -n pyf
        k exec -it busybox-pvc -n pyf -- cp /etc/passwd /etc/foo/passwd      
        ```      
        </details>
       
-38. <b>Create a second pod which is identical with the one you just created (use different name). Connect to it and verify that '/etc/foo' contains the 'passwd' file. Delete the pods.</b> 
+42. <b>Create a second pod which is identical with the one you just created (use different name). Connect to it and verify that '/etc/foo' contains the 'passwd' file. Delete the pods.</b> 
        <details><summary>Show</summary>
        
        ```
-       k run busybox-second-pvc --image=busybox --namespace=pyf --dry-run=client -o yaml -- sleep 3600 > 38-pod.yml
-       vi 38-pod.yml
+       k run busybox-second-pvc --image=busybox --namespace=pyf --dry-run=client -o yaml -- sleep 3600 > 42-pod.yml
+       vi 42-pod.yml
        ```
        ```
        apiVersion: v1
@@ -887,7 +887,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
                name: vol-pvc
        ```
        ```
-       k create -f 38-pod.yml 
+       k create -f 42-pod.yml 
        k get pod -n pyf
        k exec -it busybox-second-pvc -n pyf -- cat /etc/foo/passwd     
        ```      
@@ -895,12 +895,12 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
       
 <h2>Security</h2>  
       
-39. <b>Create busybox-user pod that runs sleep for 1 hour and has user ID set to 101. Check the UID from within the container.</b> 
+43. <b>Create busybox-user pod that runs sleep for 1 hour and has user ID set to 101. Check the UID from within the container.</b> 
        <details><summary>Show</summary>
        
        ```
-       k run busybox-user --image=busybox --namespace=pyf --dry-run=client -o yaml -- sleep 3600 > 39-pod.yml
-       vi 39-pod.yml
+       k run busybox-user --image=busybox --namespace=pyf --dry-run=client -o yaml -- sleep 3600 > 43-pod.yml
+       vi 43-pod.yml
        ```
        ```
        apiVersion: v1
@@ -922,18 +922,18 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
            name: busybox-user
        ```
        ```
-       k create -f 39-pod.yml 
+       k create -f 43-pod.yml 
        k get pod -n pyf
        k exec -it -n pyf busybox-user -- id -u
        ```      
        </details>   
 
-40. <b>Create the YAML for an nginx pod that has capabilities "NET_ADMIN" and "SYS_TIME".</b> 
+44. <b>Create the YAML for an nginx pod that has capabilities "NET_ADMIN" and "SYS_TIME".</b> 
        <details><summary>Show</summary>
        
        ```
-       k run nginx-sec-pod --image=nginx --namespace=pyf --dry-run=client -o yaml > 40-pod.yaml
-       vi 40-pod.yml
+       k run nginx-sec-pod --image=nginx --namespace=pyf --dry-run=client -o yaml > 44-pod.yaml
+       vi 44-pod.yml
        ```
        ```
        apiVersion: v1
@@ -953,12 +953,12 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
                add: ["NET_ADMIN", "SYS_TIME"]
        ```
        ```
-       k create -f 40-pod.yml 
+       k create -f 44-pod.yml 
        k get pod -n pyf
        k exec -it -n pyf nginx-sec-pod -- cat /proc/1/status # CapPrm:00000000aa0435fb | CapEff:00000000aa0435fb
        ```      
        </details>    
-41. <b>Create a new service account with the name pvviewer-practice. Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role-practice and ClusterRoleBinding called pvviewer-role-binding-practice.</b> 
+45. <b>Create a new service account with the name pvviewer-practice. Grant this Service account access to list all PersistentVolumes in the cluster by creating an appropriate cluster role called pvviewer-role-practice and ClusterRoleBinding called pvviewer-role-binding-practice.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -975,7 +975,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
 
 <h2>Networking</h2>  
 
-42. <b>Create a pod with image nginx called nginx-1 and expose its port 80.</b> 
+46. <b>Create a pod with image nginx called nginx-1 and expose its port 80.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -989,7 +989,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
        ```
        </details>            
  
-43. <b>Get service's ClusterIP, create a temp busybox-1 pod and 'hit' that IP with wget.</b> 
+47. <b>Get service's ClusterIP, create a temp busybox-1 pod and 'hit' that IP with wget.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -999,12 +999,12 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
 
        </details>   
 
-44. <b>Convert the ClusterIP to NodePort for the same service and find the NodePort. Hit the service(create temp busybox pod) using Node's IP and Port.</b> 
+48. <b>Convert the ClusterIP to NodePort for the same service and find the NodePort. Hit the service(create temp busybox pod) using Node's IP and Port.</b> 
        <details><summary>Show</summary>
        
        ```
-       k get service nginx-1 -n pyf -o yaml > 44-service.yml
-       vi 44-service.yml 
+       k get service nginx-1 -n pyf -o yaml > 48-service.yml
+       vi 48-service.yml 
        ```
        ```
        apiVersion: v1
@@ -1024,7 +1024,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
        ```      
        ```      
        k delete service nginx-1 -n pyf
-       k create -f 44-service.yml      
+       k create -f 48-service.yml      
        ```
        ```      
        k get service/nginx-1 -n pyf #NODE_PORT
@@ -1035,7 +1035,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
 
        </details>         
     
-45. <b>Create an nginx-last deployment of 2 replicas, expose it via a ClusterIP service on port 80. Create a NetworkPolicy so that only pods with labels 'access: granted' can access the deployment.</b> 
+49. <b>Create an nginx-last deployment of 2 replicas, expose it via a ClusterIP service on port 80. Create a NetworkPolicy so that only pods with labels 'access: granted' can access the deployment.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1043,7 +1043,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
        k expose deployment nginx-last --namespace=pyf --target-port=80
        k describe service/nginx-last -n pyf
        k get pod -n pyf --show-labels # app=nginx-last     
-       vi 45-np.yml 
+       vi 49-np.yml 
        ```
        ```
        apiVersion: networking.k8s.io/v1
@@ -1067,7 +1067,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
              port: 80     
        ```      
        ```      
-       k create -f 45-np.yml
+       k create -f 49-np.yml
        k get service/nginx-last -n pyf # CLUSTER_IP
        ```
        ```
@@ -1078,7 +1078,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
 
        </details>           
  
-46. <b>Create a pod with image nginx called nginx and expose its port 80. Confirm that ClusterIP has been created. Also check endpoints</b> 
+50. <b>Create a pod with image nginx called nginx and expose its port 80. Confirm that ClusterIP has been created. Also check endpoints</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1092,7 +1092,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
 
       </details>
       
-47. <b>Get service's ClusterIP, create a temp busybox pod and 'hit' that IP with wget.</b> 
+51. <b>Get service's ClusterIP, create a temp busybox pod and 'hit' that IP with wget.</b> 
        <details><summary>Show</summary>      
       
        ```
@@ -1107,7 +1107,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
              
 <h2>Challenging</h2>  
 
-46. <b>Create an nginx pod called nginx-resolver using image nginx, expose it internally with a service called nginx-resolver-service. Test that you are able to look up the service and pod names from within the cluster. Use the image: busybox:1.28 for dns lookup.</b> 
+52. <b>Create an nginx pod called nginx-resolver using image nginx, expose it internally with a service called nginx-resolver-service. Test that you are able to look up the service and pod names from within the cluster. Use the image: busybox:1.28 for dns lookup.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1119,7 +1119,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
 
        </details>
 
-47. <b>List the InternalIP of all nodes of the cluster.</b> 
+53. <b>List the InternalIP of all nodes of the cluster.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1131,7 +1131,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
 
        </details>      
 
-48. <b>Taint one worker node to be Unschedulable. Once done, create a pod called dev-redis with image redis:alpine to ensure workloads are not scheduled to the tainted node. Finally, create a new pod called prod-redis with image redis:alpine with toleration to be scheduled on the tainted node.</b> 
+54. <b>Taint one worker node to be Unschedulable. Once done, create a pod called dev-redis with image redis:alpine to ensure workloads are not scheduled to the tainted node. Finally, create a new pod called prod-redis with image redis:alpine with toleration to be scheduled on the tainted node.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1140,8 +1140,8 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
        k get pod pod-taint -n pyf -o wide # worker1    
        ```
        ```      
-       k run pod-taint-toleration-redis --image=nginx --namespace=pyf --dry-run=client -o yaml> 48-pod.yml
-       vi 48-pod.yml      
+       k run pod-taint-toleration-redis --image=nginx --namespace=pyf --dry-run=client -o yaml> 54-pod.yml
+       vi 54-pod.yml      
        ``` 
        ``` 
        apiVersion: v1
@@ -1163,7 +1163,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
            name: pod-taint-toleration      
        ```
        ```
-       k create -f 48-pod.yml 
+       k create -f 54-pod.yml 
        k get pod pod-taint-toleration -n pyf -o wide # worker2     
        ```
        ```      
@@ -1172,12 +1172,12 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
 
        </details>         
 
-49. <b>Create a Pod called redis-storage with image redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod. Use volumeMount with mountPath = /data/redis.</b> 
+55. <b>Create a Pod called redis-storage with image redis:alpine with a Volume of type emptyDir that lasts for the life of the Pod. Use volumeMount with mountPath = /data/redis.</b> 
        <details><summary>Show</summary>
        
        ```
-       k run redis-storage --namespace=pyf --image=redis:alpine --dry-run=client -o yaml > 49-pod.yml
-       vi 49-pod.yml 
+       k run redis-storage --namespace=pyf --image=redis:alpine --dry-run=client -o yaml > 55-pod.yml
+       vi 55-pod.yml 
        ```
        ```      
        apiVersion: v1
@@ -1200,13 +1200,13 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
              mountPath: /data/redis     
        ``` 
        ``` 
-       k create -f 49-pod.yml      
+       k create -f 55-pod.yml      
        k describe pod/redis-storage -n pyf|grep -i mounts -A1 
        ```
              
        </details>        
  
-50. <b>Create a new deployment called nginx-deploy, with image nginx:1.16 and 1 replica. Record the version. Next upgrade the deployment to version 1.17 using rolling update. Make sure that the version upgrade is recorded in the resource annotation.</b> 
+56. <b>Create a new deployment called nginx-deploy, with image nginx:1.16 and 1 replica. Record the version. Next upgrade the deployment to version 1.17 using rolling update. Make sure that the version upgrade is recorded in the resource annotation.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1221,12 +1221,12 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
       
        </details>
 
-51. <b>Create a Pod with two containers, both with image busybox and command "echo hello; sleep 3600". Connect to the second container and run 'ls'.</b> 
+57. <b>Create a Pod with two containers, both with image busybox and command "echo hello; sleep 3600". Connect to the second container and run 'ls'.</b> 
        <details><summary>Show</summary>
        
        ```
-       k run busybox-multi-container --image=busybox --namespace=pyf --dry-run=client -o yaml -- /bin/sh -c "echo hello; sleep 3600" > 52-pod.yml
-       vi 52-pod.yml      
+       k run busybox-multi-container --image=busybox --namespace=pyf --dry-run=client -o yaml -- /bin/sh -c "echo hello; sleep 3600" > 57-pod.yml
+       vi 57-pod.yml      
        ```
        ```
        apiVersion: v1
@@ -1252,7 +1252,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
            name: busybox-container-2      
        ```      
        ```
-       k create -f 52-pod.yml
+       k create -f 57-pod.yml
        k get -n pyf pod/busybox-multi-container      
        ```    
        ```
@@ -1260,12 +1260,12 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
        ```      
        </details>
 
-52. <b>Create pod with nginx container exposed at port 80. Add a busybox init container which downloads a page using "wget -O /work-dir/index.html http://protectyourflag.com". Make a volume of type emptyDir and mount it in both containers. For the nginx container, mount it on "/usr/share/nginx/html" and for the initcontainer, mount it on "/work-dir". When done, get the IP of the created pod and create a busybox pod and run "wget -O- IP".</b> 
+58. <b>Create pod with nginx container exposed at port 80. Add a busybox init container which downloads a page using "wget -O /work-dir/index.html http://protectyourflag.com". Make a volume of type emptyDir and mount it in both containers. For the nginx container, mount it on "/usr/share/nginx/html" and for the initcontainer, mount it on "/work-dir". When done, get the IP of the created pod and create a busybox pod and run "wget -O- IP".</b> 
        <details><summary>Show</summary>
        
        ```
-       k run multi-init-container --image=busybox --namespace=pyf --dry-run=client -o yaml -- /bin/sh -c 'wget -O /work-dir/index.html http://pyf.com' > 53-pod.yml
-       vi 53-pod.yml      
+       k run multi-init-container --image=busybox --namespace=pyf --dry-run=client -o yaml -- /bin/sh -c 'wget -O /work-dir/index.html http://pyf.com' > 58-pod.yml
+       vi 58-pod.yml      
        ```
        ```
        apiVersion: v1
@@ -1299,7 +1299,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
            - containerPort: 80      
        ```      
        ```
-       k create -f 53-pod.yml
+       k create -f 58-pod.yml
        k get -n pyf pod/multi-init-container
        k describe pod -n pyf multi-init-container      
        ```    
@@ -1308,7 +1308,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
        ```      
        </details>    
 
-52. <b>Create a static pod named static-pod on master node with the image nginx and have resource requests for 50m CPU and 30Mi memory. Then create a NodePort service named static-pod-service which exposes that static pod on port 80.</b> 
+59. <b>Create a static pod named static-pod on master node with the image nginx and have resource requests for 50m CPU and 30Mi memory. Then create a NodePort service named static-pod-service which exposes that static pod on port 80.</b> 
        <details><summary>Show</summary>
        
        ```
@@ -1339,17 +1339,12 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
        ```      
        </details>    
 
-
-
-<!-- 53. <b>Create a pod named multi-container with four containers, named c1, c2 and c3. There should be a volume attached to that pod and mounted into every container, but the volume shouldn't be persisted or shared with other pods. 
-Container c1 should be of image nginx:latest and have the name of the node where its pod is running on value available as environment variable MY_NODE_NAME.
-Container c2 should be of image busybox and write the output of the date command every second in the shared volume into file date.log. You can use "while true; do date >> /your/vol/path/date.log; sleep 1; done".
-Container c3 should be of image busybox and constantly send the content of file date.log from the shared volume to stdout. You can use tail -f /your/vol/path/date.log for this.</b> 
+60. <b>Create a pod named multi-container with four containers, named x-one, x-two and x-three. There should be a volume attached to that pod and mounted into every container, but the volume shouldn't be persisted or shared with other pods. Container x-one should be of image nginx:latest and have the name of the node where its pod is running on value available as environment variable MY_NODE_NAME. Container x-two should be of image busybox and write the output of the date command every second in the shared volume into file date.log. You can use "while true; do date >> /your/vol/path/date.log; sleep 1; done". Container x-three should be of image busybox and constantly send the content of file date.log from the shared volume to stdout. You can use tail -f /your/vol/path/date.log for this.</b> 
       <details><summary>Show</summary>
 
       ```
-      k run multi-container --image=nginx:latest --dry-run=client -o yaml > 53-multi-pod.yaml
-      vi 53-multi-pod.yaml
+      k run multi-container --image=nginx:latest --dry-run=client -o yaml > 60-multi-pod.yaml
+      vi 60-multi-pod.yaml
       ```
       ```
       apiVersion: v1
@@ -1364,7 +1359,7 @@ Container c3 should be of image busybox and constantly send the content of file 
             emptyDir: {}
         containers:
         - image: nginx:latest
-          name: c1
+          name: x-one
           volumeMounts:
           - mountPath: /vol
             name: pod-volume
@@ -1375,22 +1370,22 @@ Container c3 should be of image busybox and constantly send the content of file 
                 fieldPath: spec.nodeName
             name: pod-volume
         - image: busybox
-          name: c2
+          name: x-two
           command: ["/bin/sh", "-c", "while true; do date >> /vol/date.log; sleep 1;done"]
           volumeMounts:
           - mountPath: /vol
             name: pod-volume
         - image: busybox
-          name: c3
+          name: x-three
           command: ["/bin/sh", "-c", "tail -f /vol/date.log"]
           volumeMounts:
           - mountPath: /vol
             name: pod-volume
       ```
       ```
-      k create -f 53-multi-pod.yaml
+      k create -f 60-multi-pod.yaml
       k get pod multi-container
-      k logs multi-container -c c3 # you have to see the logs of date.log
+      k logs multi-container -c x-three # you have to see the logs of date.log
       ```
-      </details>       -->
+      </details>
   

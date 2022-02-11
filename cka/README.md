@@ -146,7 +146,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
 
 <h3>Backup & Restore</h3>
 
-2. <b>Installing etcdctl</b>
+1. <b>Installing etcdctl</b>
      <details><summary>Show</summary>
 
       ```
@@ -332,7 +332,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
         
 <h3>Contexts</h3>
         
-1. <b>Configuration</b>        
+- <b>Configuration</b>        
       <details><summary>Show</summary>
 
       ```
