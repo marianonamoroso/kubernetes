@@ -1339,7 +1339,7 @@ Create a service named svc-check with the selector svc=ready. Finally, create se
        ```      
        </details>    
 
-60. <b>Create a pod named multi-container with four containers, named x-one, x-two and x-three. There should be a volume attached to that pod and mounted into every container, but the volume shouldn't be persisted or shared with other pods. Container x-one should be of image nginx:latest and have the name of the node where its pod is running on value available as environment variable MY_NODE_NAME. Container x-two should be of image busybox and write the output of the date command every second in the shared volume into file date.log. You can use "while true; do date >> /your/vol/path/date.log; sleep 1; done". Container x-three should be of image busybox and constantly send the content of file date.log from the shared volume to stdout. You can use tail -f /your/vol/path/date.log for this.</b> 
+60. <b>Create a pod named multi-container with four containers, named x-one, x-two and x-three. There should be a volume attached to that pod and mounted into every container. The image of container x-one should be the nginx:latest and has the name of the node where its pod is running on value available as environment variable MY_NODE_NAME. Container x-two should be of image busybox and write the output of the date command every second in the shared volume into file date.log. You can use "while true; do date >> /your/vol/path/date.log; sleep 1; done". Container x-three should be of image busybox and constantly send the content of file date.log from the shared volume to stdout. You can use tail -f /your/vol/path/date.log for this.</b> 
       <details><summary>Show</summary>
 
       ```
