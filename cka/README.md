@@ -4,7 +4,7 @@ This repository contains helpful use commands, exercises for preparing the CKA.<
 
 I recommend you tackle the CKAD first in order to gain developer skills for managing deployments, multi-containers, services, network policies, ingress, configmaps, secrets, and storage. The stuff learned on your CKAD journey will let you be more comfortable to continue working with the CKA exam. You can check the following repo: https://github.com/marianonamoroso/kubernetes/tree/main/ckad<br>
 
-Finally, I'll share with you my environment used for practicing CKA's required tasks. <b>FYI, I spent an extra cost in order to run AWS infrastructure needed (medium and large instance types)</b><br><br>
+Last but not least, I'll share with you my environment used for practicing CKA's required tasks. <b>FYI, I spent an extra cost in order to run AWS infrastructure needed (medium and large instance types). You can use the automate the deployment using the terraform template which I created for achieving the CKA: https://github.com/marianonamoroso/kubernetes/tree/main/cka/terraform </b><br><br>
 
 <b>Official Documentation:</b>
 
