@@ -787,13 +787,6 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     ```
     k api-resources --namespaced -o name # list all namespaced kubernetes resources
     ```
-    ```
-    k get events -A --sort-by=.metadata.creationTimestamp
-    ```
-    ```
-    k delete pod deploy-critical-69bbc84d78-p47rb # forcing pod deletion
-    kubectl get events -n default --sort-by=.metadata.creationTimestamp | grep -i kill # you can check the logs 
-    ```
     </details>  
 
     
@@ -880,6 +873,13 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
       - --secure-port=8448
       - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
       - --kubelet-insecure-tls # you have to add the following line
+    ```
+    ```
+    k get events -A --sort-by=.metadata.creationTimestamp
+    ```
+    ```
+    k delete pod deploy-critical-69bbc84d78-p47rb # forcing pod deletion
+    kubectl get events -n default --sort-by=.metadata.creationTimestamp | grep -i kill # you can check the logs 
     ```  
     </details>         
 
