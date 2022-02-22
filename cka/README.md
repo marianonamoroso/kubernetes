@@ -736,6 +736,7 @@ ssh -i <your_key>.pem -o ServerAliveInterval=50 ubuntu@<ec2_public_ipv4_address>
     sudo find /etc/cni/net.d # networking or CNI (master)
     ps aux | grep -i kubelet # process
     ```
+    ```
     k get pod -n kube-system # static-pods
     k get ds -n kube-system # deamonsets
     k get deploy -n kube-system # deployments
