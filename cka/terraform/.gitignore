@@ -1,8 +1,6 @@
 # .terraform directories
 **/.terraform/*
 .terraform.lock.hcl
-provider.tf
-key.tf
 
 # .tfstate files
 *.tfstate
